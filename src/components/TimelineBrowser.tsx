@@ -9,7 +9,7 @@ import {
 } from "@/data/schema";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/getDictionary";
-import { formatRange } from "@/lib/date";
+import { formatDate, formatRange } from "@/lib/date";
 
 type Kind = TimelineEntry["kind"];
 type KindFilter = Kind | "all";
@@ -236,12 +236,16 @@ function Entry({
           />
 
           <p className="font-mono text-xs text-muted-foreground">
-            {formatRange(
-              String(entry.start),
-              entry.end === null ? null : String(entry.end),
-              locale,
-              dictionary.present,
-            )}
+            {/* En una certificacion, end null significa que no consta caducidad,
+                no que siga en curso: se muestra solo el ano en que se obtuvo. */}
+            {entry.kind === "certification" && entry.end === null
+              ? formatDate(String(entry.start), locale)
+              : formatRange(
+                  String(entry.start),
+                  entry.end === null ? null : String(entry.end),
+                  locale,
+                  dictionary.present,
+                )}
           </p>
 
           <h3 className="mt-1 font-display text-lg font-medium">
