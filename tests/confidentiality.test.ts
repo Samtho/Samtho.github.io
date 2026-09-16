@@ -129,7 +129,9 @@ describe("lista negra", () => {
 
   // La lista negra es de projects. La timeline necesita nombrar empleadores.
   it("no se aplica a la timeline, donde el empleador es historial publico", () => {
-    const orgs = timeline.map((entry) => entry.org.toLowerCase());
+    const orgs = timeline
+      .map((entry) => entry.org?.toLowerCase())
+      .filter((org) => org !== undefined);
     const blocked = CONFIDENTIAL_TERMS.filter((term) =>
       orgs.some((org) => org.includes(term)),
     );

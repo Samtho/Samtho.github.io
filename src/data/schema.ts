@@ -68,6 +68,8 @@ export const profileSchema = z.object({
   email: pending(z.email()),
   linkedin: pending(z.url()),
   github: z.url(),
+  /** Foto del hero. Sin ella la seccion funciona igual. */
+  photo: z.string().startsWith("/").optional(),
   cvPath: z.string().startsWith("/"),
 });
 export type Profile = z.infer<typeof profileSchema>;
@@ -82,10 +84,15 @@ export const timelineRoleSchema = z.object({
 });
 export type TimelineRole = z.infer<typeof timelineRoleSchema>;
 
-export const timelineEntrySchema = z.object({
+const timelineEntryBaseSchema = z.object({
   id: z.string().min(1),
   kind: z.enum(["work", "education", "certification"]),
-  org: z.string().min(1),
+  /**
+   * Empleador, centro o entidad emisora. Opcional solo para certificaciones:
+   * el nombre de la certificacion ya identifica lo que importa, y publicar un
+   * emisor sin verificar es peor que no publicarlo.
+   */
+  org: z.string().min(1).optional(),
   orgLogo: z.string().startsWith("/").optional(),
   start: pending(dateSchema),
   /** null significa "en curso". El marcador TODO significa "no lo se todavia". */
@@ -105,6 +112,18 @@ export const timelineEntrySchema = z.object({
   highlights: z.array(bilingualSchema),
   tags: z.array(competencyTagSchema),
 });
+
+export const timelineEntrySchema = timelineEntryBaseSchema.superRefine(
+  (entry, ctx) => {
+    if (entry.kind !== "certification" && !entry.org) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["org"],
+        message: "Un trabajo o una formacion siempre tienen organizacion.",
+      });
+    }
+  },
+);
 export type TimelineEntry = z.infer<typeof timelineEntrySchema>;
 
 /**
@@ -249,3 +268,10 @@ export const faqItemSchema = z.object({
   answer: bilingualSchema,
 });
 export type FaqItem = z.infer<typeof faqItemSchema>;
+
+export const methodStepSchema = z.object({
+  id: z.string().min(1),
+  title: bilingualSchema,
+  description: bilingualSchema,
+});
+export type MethodStep = z.infer<typeof methodStepSchema>;

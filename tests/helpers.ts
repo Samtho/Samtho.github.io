@@ -1,5 +1,6 @@
 import { capabilities } from "@/data/capabilities";
 import { faq } from "@/data/faq";
+import { method } from "@/data/method";
 import { metrics } from "@/data/metrics";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
@@ -12,6 +13,7 @@ export const dataModules = [
   { file: "src/data/projects.ts", value: projects as unknown },
   { file: "src/data/capabilities.ts", value: capabilities as unknown },
   { file: "src/data/metrics.ts", value: metrics as unknown },
+  { file: "src/data/method.ts", value: method as unknown },
   { file: "src/data/faq.ts", value: faq as unknown },
 ];
 

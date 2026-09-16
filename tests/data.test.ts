@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { capabilities } from "@/data/capabilities";
 import { faq } from "@/data/faq";
+import { method } from "@/data/method";
 import { metrics } from "@/data/metrics";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
@@ -8,6 +9,7 @@ import {
   capabilitySchema,
   COMPETENCY_TAGS,
   faqItemSchema,
+  methodStepSchema,
   metricSchema,
   profileSchema,
   projectSchema,
@@ -42,6 +44,10 @@ describe("los datos cumplen su esquema", () => {
     expect(() => z.array(metricSchema).parse(metrics)).not.toThrow();
   });
 
+  it("method", () => {
+    expect(() => z.array(methodStepSchema).parse(method)).not.toThrow();
+  });
+
   it("faq", () => {
     expect(() => z.array(faqItemSchema).parse(faq)).not.toThrow();
   });
@@ -54,6 +60,7 @@ describe("identificadores", () => {
     ["capabilities", capabilities],
     ["metrics", metrics],
     ["faq", faq],
+    ["method", method],
   ] as const;
 
   it.each(collections)("%s no repite ningun id", (_name, items) => {

@@ -58,8 +58,8 @@ export const capabilities: Capability[] = z.array(capabilitySchema).parse([
     icon: "sparkles",
     title: { es: "IA aplicada", en: "Applied AI" },
     description: {
-      es: "Usar IA dentro del sistema de trabajo diario, en flujos que cierran el hueco entre una reunión y una acción.",
-      en: "Use AI inside the daily working system, in flows that close the gap between a meeting and an action.",
+      es: "Usar IA dentro del sistema de trabajo diario, en flujos que cierran el hueco entre una reunión y una acción, con integraciones MCP en Power BI y Miro.",
+      en: "Use AI inside the daily working system, in flows that close the gap between a meeting and an action, with MCP integrations in Power BI and Miro.",
     },
   },
   {

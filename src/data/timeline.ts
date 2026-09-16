@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { timelineEntrySchema, TODO, type TimelineEntry } from "./schema";
+import { timelineEntrySchema, type TimelineEntry } from "./schema";
 
 /**
  * Año desde el que arranca el filtro por defecto de la timeline.
@@ -37,7 +37,7 @@ export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
     // Agile Lead es parte de lo que cuenta la historia.
     id: "ntt-data",
     kind: "work",
-    org: "NTT DATA Europe & Latam",
+    org: "NTT DATA",
     start: "2019-09",
     end: "2025-07",
     role: { es: "Agile Lead", en: "Agile Lead" },
@@ -59,18 +59,24 @@ export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
         },
         start: "2020-07",
         end: "2020-12",
-        context: { es: "Cliente: Banco de Chile", en: "Client: Banco de Chile" },
+        context: {
+          es: "Cliente: un banco chileno",
+          en: "Client: a Chilean bank",
+        },
       },
       {
         role: { es: "Product Manager", en: "Product Manager" },
         start: "2019-09",
         end: "2020-06",
-        context: { es: "Cliente: Enel Chile", en: "Client: Enel Chile" },
+        context: {
+          es: "Cliente: una compañía de utilities",
+          en: "Client: a utilities company",
+        },
       },
     ],
     summary: {
-      es: "Casi seis años y cuatro roles, de Product Manager a Agile Lead. Lideré transformaciones ágiles en equipos distribuidos de Chile y LATAM, con clientes de banca y utilities. Facilité más de cincuenta sesiones de planificación y retrospectiva, y trabajé la relación con stakeholders en organizaciones grandes y con prioridades en conflicto.",
-      en: "Almost six years and four roles, from Product Manager to Agile Lead. I led agile transformations across distributed teams in Chile and LATAM, with clients in banking and utilities. I facilitated more than fifty planning and retrospective sessions, and worked the stakeholder relationship in large organisations with conflicting priorities.",
+      es: "Casi seis años y cuatro roles en la unidad Europe & Latam, de Product Manager a Agile Lead. Lideré transformaciones ágiles en equipos distribuidos de Chile y LATAM, con clientes de banca y utilities. Facilité más de cincuenta sesiones de planificación y retrospectiva, y trabajé la relación con stakeholders en organizaciones grandes y con prioridades en conflicto.",
+      en: "Almost six years and four roles in the Europe & Latam unit, from Product Manager to Agile Lead. I led agile transformations across distributed teams in Chile and LATAM, with clients in banking and utilities. I facilitated more than fifty planning and retrospective sessions, and worked the stakeholder relationship in large organisations with conflicting priorities.",
     },
     highlights: [],
     tags: ["agile", "stakeholders", "delivery", "discovery"],
@@ -83,8 +89,8 @@ export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
     end: "2019-09",
     role: { es: "Product Owner", en: "Product Owner" },
     summary: {
-      es: "Plataforma de chatbots. Implementación para Telefónica del Perú (Movistar) y clientes en Chile y México.",
-      en: "Chatbot platform. Rollout for Telefónica del Perú (Movistar) and clients in Chile and Mexico.",
+      es: "Plataforma de chatbots. Implementación para un operador de telecomunicaciones en Perú y clientes en Chile y México.",
+      en: "Chatbot platform. Rollout for a telecommunications operator in Peru and clients in Chile and Mexico.",
     },
     highlights: [],
     tags: ["delivery", "stakeholders"],
@@ -100,30 +106,36 @@ export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
     tags: ["delivery"],
   },
   {
-    id: "kupos-technical-product-owner",
+    // Dos roles anidados: aqui empieza el giro de ingenieria hacia producto.
+    id: "kupos",
     kind: "work",
     org: "Kupos.cl",
-    start: "2017-02",
+    start: "2016-02",
     end: "2018-01",
     role: {
       es: "Technical Product Owner",
       en: "Technical Product Owner",
     },
+    roles: [
+      {
+        role: {
+          es: "Technical Product Owner",
+          en: "Technical Product Owner",
+        },
+        start: "2017-02",
+        end: "2018-01",
+      },
+      {
+        role: {
+          es: "Ingeniero de Operaciones",
+          en: "Operations Engineer",
+        },
+        start: "2016-02",
+        end: "2017-01",
+      },
+    ],
     highlights: [],
     tags: ["delivery", "discovery"],
-  },
-  {
-    id: "kupos-ingeniero-operaciones",
-    kind: "work",
-    org: "Kupos.cl",
-    start: "2016-02",
-    end: "2017-01",
-    role: {
-      es: "Ingeniero de Operaciones",
-      en: "Operations Engineer",
-    },
-    highlights: [],
-    tags: [],
   },
   {
     id: "beconsult",
@@ -254,7 +266,7 @@ export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
   {
     id: "okr-foundation",
     kind: "certification",
-    org: TODO,
+    // Sin emisor: Sam no lo ha verificado en su certificado.
     start: "2022",
     end: null,
     role: {
