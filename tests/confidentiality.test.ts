@@ -101,6 +101,32 @@ describe("lista negra", () => {
     expect(findConfidentialTerms("Proyecto de GIUNTI")).toContain("giunti");
   });
 
+  it("no distingue tildes", () => {
+    expect(findConfidentialTerms("Proyecto para Telefónica")).toContain(
+      "telefonica",
+    );
+    expect(findConfidentialTerms("Cuenta de AFP Hábitat")).toContain(
+      "afp habitat",
+    );
+  });
+
+  // "wom" es un termino corto: buscarlo como subcadena bloquearia textos
+  // legitimos que contengan "women" o "wombat".
+  it("compara por palabra completa y no por subcadena", () => {
+    expect(findConfidentialTerms("A tool for women in tech")).toEqual([]);
+    expect(findConfidentialTerms("Proyecto para WOM")).toContain("wom");
+  });
+
+  it("detecta clientes y sistemas de empleadores anteriores", () => {
+    expect(findConfidentialTerms("Migracion a Magento")).toContain("magento");
+    expect(findConfidentialTerms("Integracion con Transbank")).toContain(
+      "transbank",
+    );
+    expect(findConfidentialTerms("Proyecto del Banco de Chile")).toContain(
+      "banco de chile",
+    );
+  });
+
   // La lista negra es de projects. La timeline necesita nombrar empleadores.
   it("no se aplica a la timeline, donde el empleador es historial publico", () => {
     const orgs = timeline.map((entry) => entry.org.toLowerCase());

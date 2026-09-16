@@ -6,13 +6,14 @@ import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import {
   capabilitySchema,
+  COMPETENCY_TAGS,
   faqItemSchema,
   metricSchema,
   profileSchema,
   projectSchema,
   timelineEntrySchema,
   TODO,
-  yearMonthSchema,
+  dateSchema,
 } from "@/data/schema";
 import { timeline } from "@/data/timeline";
 import { dataModules, walk } from "./helpers";
@@ -64,19 +65,58 @@ describe("identificadores", () => {
     const tags = capabilities.map((capability) => capability.tag);
     expect(new Set(tags).size).toBe(tags.length);
   });
+
+  // Si se anade un tag al enum sin describirlo, el filtro existe pero la
+  // seccion de competencias se queda coja. Tienen que ir a la par.
+  it("hay exactamente una competencia por cada tag del enum", () => {
+    const tags = capabilities.map((capability) => capability.tag).sort();
+    expect(tags).toEqual([...COMPETENCY_TAGS].sort());
+  });
 });
 
 describe("fechas de la timeline", () => {
+  const isDate = (value: unknown) => dateSchema.safeParse(value).success;
+
   it("ninguna entrada termina antes de empezar", () => {
     for (const entry of timeline) {
-      const startIsDate = yearMonthSchema.safeParse(entry.start).success;
-      const endIsDate = yearMonthSchema.safeParse(entry.end).success;
-      if (!startIsDate || !endIsDate) continue;
+      if (!isDate(entry.start) || !isDate(entry.end)) continue;
 
       expect(
         String(entry.end) >= String(entry.start),
         `${entry.id}: ${entry.start} -> ${entry.end}`,
       ).toBe(true);
+    }
+  });
+
+  // Los roles anidados no pueden salirse del periodo de la organizacion.
+  it("los roles anidados caben dentro de su organizacion", () => {
+    for (const entry of timeline) {
+      for (const role of entry.roles ?? []) {
+        if (isDate(entry.start) && isDate(role.start)) {
+          expect(
+            String(role.start) >= String(entry.start),
+            `${entry.id}: un rol empieza antes que la organizacion`,
+          ).toBe(true);
+        }
+        if (isDate(entry.end) && isDate(role.end)) {
+          expect(
+            String(role.end) <= String(entry.end),
+            `${entry.id}: un rol termina despues que la organizacion`,
+          ).toBe(true);
+        }
+      }
+    }
+  });
+
+  it("cada rol anidado termina despues de empezar", () => {
+    for (const entry of timeline) {
+      for (const role of entry.roles ?? []) {
+        if (!isDate(role.start) || !isDate(role.end)) continue;
+        expect(
+          String(role.end) >= String(role.start),
+          `${entry.id}: ${role.start} -> ${role.end}`,
+        ).toBe(true);
+      }
     }
   });
 });
