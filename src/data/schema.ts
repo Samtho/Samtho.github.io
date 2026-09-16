@@ -77,6 +77,8 @@ export const timelineRoleSchema = z.object({
   role: bilingualSchema,
   start: pending(dateSchema),
   end: pending(dateSchema).nullable(),
+  /** Contexto corto del encargo, por ejemplo el cliente. */
+  context: bilingualSchema.optional(),
 });
 export type TimelineRole = z.infer<typeof timelineRoleSchema>;
 
@@ -95,7 +97,11 @@ export const timelineEntrySchema = z.object({
    * Se omite cuando solo hubo un rol.
    */
   roles: z.array(timelineRoleSchema).optional(),
-  summary: bilingualSchema,
+  /**
+   * Opcional a proposito. Una certificacion o un rol de hace diez anios se
+   * explican con su titulo; forzar un resumen solo produce relleno.
+   */
+  summary: bilingualSchema.optional(),
   highlights: z.array(bilingualSchema),
   tags: z.array(competencyTagSchema),
 });
