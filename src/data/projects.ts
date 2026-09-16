@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { projectSchema, TODO, type Project } from "./schema";
+import { PENDING, projectSchema, type Project } from "./schema";
 
 /**
  * Proyectos publicables.
@@ -21,7 +21,7 @@ export const projects: Project[] = z.array(projectSchema).parse([
       en: "Final master's project at INESDI, published with permission. It studies whether changing the catalogue's genre mix pays off for export. The deliverable is a React and Vite application with two visual registers, ECharts visualisations and an analyst dashboard.",
     },
     year: "2026",
-    role: { es: TODO, en: TODO },
+    role: { es: PENDING, en: PENDING },
     stack: ["React", "Vite", "ECharts"],
     tags: ["data", "strategy"],
     liveUrl: "https://samtho.github.io/panoplia-defensa-v3/",

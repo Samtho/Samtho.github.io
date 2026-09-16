@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { faqItemSchema, TODO, type FaqItem } from "./schema";
+import { faqItemSchema, PENDING, type FaqItem } from "./schema";
 
 /** Las preguntas que hace todo recruiter en los primeros cinco minutos. */
 export const faq: FaqItem[] = z.array(faqItemSchema).parse([
@@ -9,7 +9,7 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       es: "¿Qué tipo de rol buscas?",
       en: "What kind of role are you looking for?",
     },
-    answer: { es: TODO, en: TODO },
+    answer: { es: PENDING, en: PENDING },
   },
   {
     id: "work-mode",
@@ -17,7 +17,7 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       es: "¿Presencial, híbrido o remoto?",
       en: "On-site, hybrid or remote?",
     },
-    answer: { es: TODO, en: TODO },
+    answer: { es: PENDING, en: PENDING },
   },
   {
     id: "industries",
@@ -47,6 +47,6 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       es: "¿Estás disponible ahora mismo?",
       en: "Are you available right now?",
     },
-    answer: { es: TODO, en: TODO },
+    answer: { es: PENDING, en: PENDING },
   },
 ]);

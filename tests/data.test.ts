@@ -15,6 +15,7 @@ import {
   projectSchema,
   timelineEntrySchema,
   TODO,
+  PENDING,
   dateSchema,
 } from "@/data/schema";
 import { timeline } from "@/data/timeline";
@@ -148,5 +149,25 @@ describe("marcador de pendiente", () => {
         expect(leaf, `${file} en ${path}`).toBe(TODO);
       });
     }
+  });
+});
+
+describe("marcadores visibles", () => {
+  /**
+   * Activa este test (quita el .skip) antes de poner la URL en el CV.
+   * Mientras tanto "[por definir]" se pinta a proposito en la pagina, para
+   * que los huecos se vean y se corrijan mirandolos. El dia que la web se
+   * publique de verdad, ninguno puede seguir ahi.
+   */
+  it.skip("no queda ningun [por definir] en los datos", () => {
+    const pendings: string[] = [];
+
+    for (const { file, value } of dataModules) {
+      walk(value, (leaf, path) => {
+        if (leaf === PENDING) pendings.push(`${file} en ${path}`);
+      });
+    }
+
+    expect(pendings, pendings.join("\n")).toEqual([]);
   });
 });

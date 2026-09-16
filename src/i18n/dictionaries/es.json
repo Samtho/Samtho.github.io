@@ -20,8 +20,49 @@
     "faq": "Preguntas frecuentes",
     "cta": "Hablemos"
   },
-  "shell": {
-    "pending": "Sección en construcción."
+  "hero": {
+    "viewProjects": "Ver proyectos",
+    "downloadCv": "Descargar CV",
+    "photoAlt": "Retrato de Samuel Ortega",
+    "photoPending": "Foto"
+  },
+  "proof": {
+    "note": "Empresas, escuelas y entidades por las que he pasado."
+  },
+  "projects": {
+    "role": "Mi rol",
+    "stack": "Stack",
+    "live": "Ver online",
+    "repo": "Repositorio",
+    "sourceAcademic": "Académico",
+    "sourcePersonal": "Personal"
+  },
+  "timeline": {
+    "filterByKind": "Filtrar por tipo",
+    "filterByTag": "Filtrar por competencia",
+    "kindAll": "Todo",
+    "kindWork": "Trabajo",
+    "kindEducation": "Formación",
+    "kindCertification": "Certificaciones",
+    "showing": "{visible} de {total} entradas",
+    "recentOnly": "Desde 2018",
+    "showEverything": "Ver todo",
+    "emptyTitle": "Ninguna entrada cumple estos filtros.",
+    "clearFilters": "Limpiar filtros",
+    "present": "Actualidad",
+    "expand": "Ver detalle",
+    "collapse": "Ocultar detalle",
+    "roles": "Roles"
+  },
+  "cta": {
+    "intro": "Si buscas a alguien que ponga orden en producto, escríbeme.",
+    "email": "Escríbeme",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "cv": "Descargar CV"
+  },
+  "pending": {
+    "label": "Por definir"
   },
   "tags": {
     "discovery": "Discovery",

@@ -11,6 +11,13 @@ import { z } from "zod";
 export const TODO = "TODO: Sam debe rellenar";
 
 /**
+ * Marcador visible. A diferencia de TODO, este se renderiza en la pagina:
+ * Sam ve el hueco en su sitio y lo corrige mirandolo. Un test comprueba que
+ * no queden antes de publicar la URL en el CV.
+ */
+export const PENDING = "[por definir]";
+
+/**
  * Envuelve un esquema restrictivo (fecha, URL, email) para que tambien acepte
  * el marcador de pendiente. Los campos de texto libre no lo necesitan: TODO ya
  * es una cadena no vacia y pasa su validacion.

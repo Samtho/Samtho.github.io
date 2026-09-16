@@ -1,23 +1,18 @@
 import { profile } from "@/data/profile";
 import type { Locale } from "@/i18n/config";
-import { getDictionary, type Dictionary } from "@/i18n/getDictionary";
+import { getDictionary } from "@/i18n/getDictionary";
 import { LanguageToggle } from "./LanguageToggle";
+import { Section } from "./Section";
+import { Spine } from "./Spine";
 import { ThemeToggle } from "./ThemeToggle";
-
-/**
- * Orden de las secciones de la pagina. En el Milestone 2 cada una es un hueco
- * con su titulo; el Milestone 3 las sustituye por componentes de verdad.
- */
-const SECTION_IDS = [
-  "proof",
-  "method",
-  "capabilities",
-  "timeline",
-  "projects",
-  "metrics",
-  "faq",
-  "cta",
-] as const satisfies ReadonlyArray<keyof Dictionary["sections"]>;
+import { Capabilities } from "./sections/Capabilities";
+import { Cta } from "./sections/Cta";
+import { Faq } from "./sections/Faq";
+import { Hero } from "./sections/Hero";
+import { Method } from "./sections/Method";
+import { Metrics } from "./sections/Metrics";
+import { Proof } from "./sections/Proof";
+import { Projects } from "./sections/Projects";
 
 type Props = {
   locale: Locale;
@@ -37,9 +32,14 @@ export function Landing({ locale }: Props) {
         {dictionary.nav.skipToContent}
       </a>
 
-      <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-6 py-3">
-          <span className="text-sm font-medium">{profile.name}</span>
+      <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-4 px-6 py-3">
+          <a
+            href="#hero"
+            className="font-display text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            {profile.name}
+          </a>
           <nav className="flex items-center gap-2">
             <LanguageToggle
               locale={locale}
@@ -54,34 +54,30 @@ export function Landing({ locale }: Props) {
         </div>
       </header>
 
-      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-6">
-        <section
-          id="hero"
-          className="flex min-h-[60svh] flex-col justify-center gap-4 py-16"
-        >
-          <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-            {profile.name}
-          </h1>
-          <p className="max-w-prose text-lg text-pretty text-muted-foreground">
-            {profile.headline[locale]}
-          </p>
-        </section>
+      <main id="main" className="mx-auto w-full max-w-4xl flex-1 px-6">
+        <div className="spine">
+          <Hero locale={locale} dictionary={dictionary} />
+          <Proof dictionary={dictionary} />
+          <Method locale={locale} dictionary={dictionary} />
+          <Capabilities locale={locale} dictionary={dictionary} />
 
-        {SECTION_IDS.map((id) => (
-          <section
-            key={id}
-            id={id}
-            className="scroll-mt-20 border-t border-border py-12"
-          >
-            <h2 className="text-sm font-medium tracking-wide text-brand uppercase">
-              {dictionary.sections[id]}
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {dictionary.shell.pending}
-            </p>
-          </section>
-        ))}
+          {/* La timeline interactiva llega en el Milestone 4. */}
+          <Section id="timeline" title={dictionary.sections.timeline} />
+
+          <Projects locale={locale} dictionary={dictionary} />
+          <Metrics locale={locale} dictionary={dictionary} />
+          <Faq locale={locale} dictionary={dictionary} />
+          <Cta dictionary={dictionary} />
+        </div>
       </main>
+
+      <footer className="mx-auto w-full max-w-4xl px-6 py-10">
+        <p className="border-t border-border pt-6 font-mono text-xs text-muted-foreground">
+          {profile.name} · {new Date().getFullYear()}
+        </p>
+      </footer>
+
+      <Spine />
     </div>
   );
 }

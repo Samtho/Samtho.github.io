@@ -20,8 +20,49 @@
     "faq": "Frequently asked questions",
     "cta": "Let's talk"
   },
-  "shell": {
-    "pending": "Section under construction."
+  "hero": {
+    "viewProjects": "See projects",
+    "downloadCv": "Download CV",
+    "photoAlt": "Portrait of Samuel Ortega",
+    "photoPending": "Photo"
+  },
+  "proof": {
+    "note": "Companies, schools and bodies I have worked with."
+  },
+  "projects": {
+    "role": "My role",
+    "stack": "Stack",
+    "live": "View online",
+    "repo": "Repository",
+    "sourceAcademic": "Academic",
+    "sourcePersonal": "Personal"
+  },
+  "timeline": {
+    "filterByKind": "Filter by type",
+    "filterByTag": "Filter by capability",
+    "kindAll": "All",
+    "kindWork": "Work",
+    "kindEducation": "Education",
+    "kindCertification": "Certifications",
+    "showing": "{visible} of {total} entries",
+    "recentOnly": "From 2018",
+    "showEverything": "Show everything",
+    "emptyTitle": "No entry matches these filters.",
+    "clearFilters": "Clear filters",
+    "present": "Present",
+    "expand": "Show detail",
+    "collapse": "Hide detail",
+    "roles": "Roles"
+  },
+  "cta": {
+    "intro": "If you need someone to bring order to product, get in touch.",
+    "email": "Email me",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "cv": "Download CV"
+  },
+  "pending": {
+    "label": "To be defined"
   },
   "tags": {
     "discovery": "Discovery",
