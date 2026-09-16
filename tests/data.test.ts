@@ -108,6 +108,16 @@ describe("fechas de la timeline", () => {
     }
   });
 
+  // El esquema documenta que van de mas reciente a mas antiguo, y la UI
+  // los va a pintar en ese orden sin volver a ordenarlos.
+  it("los roles anidados van de mas reciente a mas antiguo", () => {
+    for (const entry of timeline) {
+      const starts = (entry.roles ?? []).map((role) => String(role.start));
+      const descending = [...starts].sort().reverse();
+      expect(starts, entry.id).toEqual(descending);
+    }
+  });
+
   it("cada rol anidado termina despues de empezar", () => {
     for (const entry of timeline) {
       for (const role of entry.roles ?? []) {
