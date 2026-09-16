@@ -41,8 +41,8 @@ export const metrics: Metric[] = z.array(metricSchema).parse([
       en: "team agility index",
     },
     source: {
-      es: "Medido con Scrum of Scrums en una organización bancaria.",
-      en: "Measured with Scrum of Scrums at a banking organisation.",
+      es: "Medido con Scrum of Scrums en una organización del sector financiero.",
+      en: "Measured with Scrum of Scrums at a financial services organisation.",
     },
   },
 ]);

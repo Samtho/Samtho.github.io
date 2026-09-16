@@ -1,4 +1,4 @@
-import { profileSchema, TODO, type Profile } from "./schema";
+import { profileSchema, type Profile } from "./schema";
 
 /**
  * La bio en espanol es el borrador aprobado por Sam, tal cual.
@@ -25,8 +25,12 @@ const bioEn = [
 
 export const profile: Profile = profileSchema.parse({
   name: "Samuel Ortega",
-  // Opcion A de la ficha. La ficha no llego actualizada con las opciones.
-  headline: { es: TODO, en: TODO },
+  // Opcion A de la ficha. El puesto es Product Owner; el titular del hero
+  // dice Product Manager, igual que en su LinkedIn.
+  headline: {
+    es: "Product Manager de ecommerce multirregional. Creo claridad donde hay muchos mercados, varios países y ninguna estructura previa.",
+    en: "Product Manager for multi-regional ecommerce. I create clarity where there are many markets, several countries and no structure in place.",
+  },
   bio: { es: bioEs, en: bioEn },
   location: { es: "Madrid, España", en: "Madrid, Spain" },
   email: "stortega.11@gmail.com",

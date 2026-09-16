@@ -24,7 +24,7 @@ export const projects: Project[] = z.array(projectSchema).parse([
     role: { es: TODO, en: TODO },
     stack: ["React", "Vite", "ECharts"],
     tags: ["data", "strategy"],
-    liveUrl: TODO,
+    liveUrl: "https://samtho.github.io/panoplia-defensa-v3/",
     repoUrl: TODO,
     confidential: false,
     source: "academic",
