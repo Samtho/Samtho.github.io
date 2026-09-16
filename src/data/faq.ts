@@ -25,7 +25,10 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       es: "¿En qué industrias te mueves mejor?",
       en: "Which industries do you know best?",
     },
-    answer: { es: TODO, en: TODO },
+    answer: {
+      es: "Ecommerce, banca, utilities, telecomunicaciones, transporte y evaluación psicométrica.",
+      en: "Ecommerce, banking, utilities, telecommunications, transport and psychometric assessment.",
+    },
   },
   {
     id: "languages",
@@ -34,8 +37,8 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       en: "Which languages do you work in?",
     },
     answer: {
-      es: "Español nativo, inglés avanzado y portugués B1.",
-      en: "Native Spanish, advanced English and B1 Portuguese.",
+      es: "Español nativo, inglés C1, portugués B1 y alemán básico.",
+      en: "Native Spanish, C1 English, B1 Portuguese and basic German.",
     },
   },
   {

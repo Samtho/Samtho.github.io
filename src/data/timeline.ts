@@ -10,35 +10,66 @@ import { timelineEntrySchema, TODO, type TimelineEntry } from "./schema";
  */
 export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
   {
-    id: "giunti-product-manager",
+    id: "giunti-product-owner",
     kind: "work",
     org: "Giunti Psychometrics",
     start: "2026-02",
     end: null,
-    role: { es: "Product Manager", en: "Product Manager" },
+    // La ficha antigua decia "Product Manager". RESPUESTAS lo da como firme:
+    // Product Owner. Pendiente de que Sam confirme cual va publicado.
+    role: { es: "Product Owner", en: "Product Owner" },
+    // Falta el texto de la opcion B, que Sam eligio pero no llego en la ficha.
     summary: { es: TODO, en: TODO },
     highlights: [],
-    tags: ["delivery", "stakeholders"],
+    tags: ["delivery", "stakeholders", "strategy"],
   },
   {
-    id: "ntt-data-agile-coach",
+    // Una sola entrada de organizacion: la progresion de Product Manager a
+    // Agile Lead es parte de lo que cuenta la historia.
+    id: "ntt-data",
     kind: "work",
     org: "NTT DATA",
-    start: TODO,
-    end: TODO,
-    role: { es: "Agile Coach", en: "Agile Coach" },
+    start: "2019-09",
+    end: "2025-07",
+    role: { es: "Agile Lead", en: "Agile Lead" },
+    roles: [
+      {
+        role: { es: "Agile Lead", en: "Agile Lead" },
+        start: "2022-07",
+        end: "2025-07",
+      },
+      {
+        role: { es: "Product Team Leader", en: "Product Team Leader" },
+        start: "2020-12",
+        end: "2022-06",
+      },
+      {
+        role: {
+          es: "Agile Project Management Officer",
+          en: "Agile Project Management Officer",
+        },
+        start: "2020-07",
+        end: "2020-12",
+      },
+      {
+        role: { es: "Product Manager", en: "Product Manager" },
+        start: "2019-09",
+        end: "2020-06",
+      },
+    ],
+    // El borrador de RESPUESTAS sigue marcado como "Samuel aprueba o corrige".
     summary: { es: TODO, en: TODO },
     highlights: [],
-    tags: ["agile"],
+    tags: ["agile", "stakeholders", "delivery", "discovery"],
   },
   {
     id: "inesdi-master-business-analytics-ia",
     kind: "education",
     org: "INESDI Business Techschool · UNIE Universidad",
     start: "2025-10",
-    // Fecha de emision del certificado segun la ficha. Pendiente de confirmar
-    // que coincide con el fin del programa.
-    end: "2026-09",
+    // Fin del programa. El certificado se emitio el 3 de septiembre de 2026,
+    // que es un hito distinto.
+    end: "2026-07",
     role: {
       es: "Máster de Formación Permanente en Business Analytics e IA",
       en: "Postgraduate Master's in Business Analytics and AI",
@@ -56,18 +87,102 @@ export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
     tags: ["data", "ai"],
   },
   {
-    id: "safe-rte",
+    id: "iebs-mba-transformacion-digital",
+    kind: "education",
+    org: "IEBS Business School",
+    start: "2021-10",
+    end: "2023-02",
+    role: {
+      es: "MBA en Transformación Digital",
+      en: "MBA in Digital Transformation",
+    },
+    summary: { es: TODO, en: TODO },
+    highlights: [],
+    tags: ["strategy"],
+  },
+  {
+    id: "kaplan-english",
+    kind: "education",
+    org: "Kaplan International College London",
+    start: "2024-04",
+    end: "2024-07",
+    role: { es: "Programa de inglés", en: "English programme" },
+    summary: { es: TODO, en: TODO },
+    highlights: [],
+    tags: [],
+  },
+  {
+    id: "ucab-ingenieria-telecomunicaciones",
+    kind: "education",
+    org: "Universidad Católica Andrés Bello",
+    // Solo consta el anio, no el mes.
+    start: "2007",
+    end: "2013",
+    role: {
+      es: "Ingeniería de Telecomunicaciones",
+      en: "Telecommunications Engineering",
+    },
+    summary: { es: TODO, en: TODO },
+    highlights: [],
+    tags: [],
+  },
+  {
+    // Sam confirma esta desde su CV. Queda por verificar si ademas tiene la
+    // certificacion SAFe RTE (Release Train Engineer), que menciono antes.
+    id: "safe-lean-portfolio-manager",
     kind: "certification",
-    org: TODO,
-    start: TODO,
-    // null aqui significa que no se ha declarado caducidad.
+    org: "Scaled Agile, Inc.",
+    start: "2023",
     end: null,
     role: {
-      es: "SAFe Release Train Engineer (RTE)",
-      en: "SAFe Release Train Engineer (RTE)",
+      es: "SAFe 6 Lean Portfolio Manager",
+      en: "SAFe 6 Lean Portfolio Manager",
     },
     summary: { es: TODO, en: TODO },
     highlights: [],
     tags: ["agile", "delivery"],
+  },
+  {
+    id: "kanban-system-design",
+    kind: "certification",
+    org: "Kanban University",
+    start: "2023",
+    end: null,
+    role: {
+      es: "Kanban System Design (KSD)",
+      en: "Kanban System Design (KSD)",
+    },
+    summary: { es: TODO, en: TODO },
+    highlights: [],
+    tags: ["agile", "delivery"],
+  },
+  {
+    id: "okr-foundation",
+    kind: "certification",
+    // RESPUESTAS deja la entidad certificadora por verificar.
+    org: TODO,
+    start: "2022",
+    end: null,
+    role: {
+      es: "Certified OKR Foundation",
+      en: "Certified OKR Foundation",
+    },
+    summary: { es: TODO, en: TODO },
+    highlights: [],
+    tags: ["strategy"],
+  },
+  {
+    id: "certified-scrum-master",
+    kind: "certification",
+    org: "Scrum Alliance",
+    start: "2020",
+    end: null,
+    role: {
+      es: "Certified Scrum Master (CSM)",
+      en: "Certified Scrum Master (CSM)",
+    },
+    summary: { es: TODO, en: TODO },
+    highlights: [],
+    tags: ["agile"],
   },
 ]);
