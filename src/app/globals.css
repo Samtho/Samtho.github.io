@@ -204,6 +204,32 @@
   }
 }
 
+@layer components {
+  /**
+   * Entrada de la timeline. Se queda en el DOM y colapsa a altura cero con el
+   * truco de grid 1fr/0fr, que es lo unico que permite animar aparicion y
+   * desaparicion sin sacar el nodo del arbol.
+   */
+  .timeline-entry {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition:
+      grid-template-rows 320ms ease,
+      opacity 220ms ease;
+  }
+
+  .timeline-entry[data-hidden="true"] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  .timeline-entry-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

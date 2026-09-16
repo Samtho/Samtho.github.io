@@ -2,7 +2,6 @@ import { profile } from "@/data/profile";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { LanguageToggle } from "./LanguageToggle";
-import { Section } from "./Section";
 import { Spine } from "./Spine";
 import { ThemeToggle } from "./ThemeToggle";
 import { Capabilities } from "./sections/Capabilities";
@@ -12,6 +11,7 @@ import { Hero } from "./sections/Hero";
 import { Method } from "./sections/Method";
 import { Metrics } from "./sections/Metrics";
 import { Proof } from "./sections/Proof";
+import { Timeline } from "./sections/Timeline";
 import { Projects } from "./sections/Projects";
 
 type Props = {
@@ -61,8 +61,7 @@ export function Landing({ locale }: Props) {
           <Method locale={locale} dictionary={dictionary} />
           <Capabilities locale={locale} dictionary={dictionary} />
 
-          {/* La timeline interactiva llega en el Milestone 4. */}
-          <Section id="timeline" title={dictionary.sections.timeline} />
+          <Timeline locale={locale} dictionary={dictionary} />
 
           <Projects locale={locale} dictionary={dictionary} />
           <Metrics locale={locale} dictionary={dictionary} />
