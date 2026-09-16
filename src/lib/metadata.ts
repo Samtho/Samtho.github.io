@@ -22,6 +22,11 @@ export function buildMetadata(locale: Locale): Metadata {
         "x-default": localePath.es,
       },
     },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.description,
+    },
     openGraph: {
       type: "website",
       siteName: profile.name,
