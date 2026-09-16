@@ -34,6 +34,14 @@ export function buildMetadata(locale: Locale): Metadata {
       url: localePath[locale],
       title: meta.title,
       description: meta.description,
+      images: [
+        {
+          url: `${localePath[locale]}og.png`,
+          width: 1200,
+          height: 630,
+          alt: meta.title,
+        },
+      ],
     },
   };
 }
