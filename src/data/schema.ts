@@ -47,10 +47,14 @@ export const COMPETENCY_TAGS = [
 export const competencyTagSchema = z.enum(COMPETENCY_TAGS);
 export type CompetencyTag = z.infer<typeof competencyTagSchema>;
 
-/** Fechas al mes. El dia no aporta nada en una trayectoria profesional. */
-export const yearMonthSchema = z
+/**
+ * Fechas de trayectoria. Admite YYYY-MM y tambien YYYY a secas, porque de la
+ * formacion mas antigua solo consta el anio. El orden lexicografico sigue
+ * siendo correcto: "2007" < "2007-01" < "2008".
+ */
+export const dateSchema = z
   .string()
-  .regex(/^\d{4}-(0[1-9]|1[0-2])$/, "usa el formato YYYY-MM");
+  .regex(/^\d{4}(-(0[1-9]|1[0-2]))?$/, "usa el formato YYYY-MM o YYYY");
 
 export const yearSchema = z
   .string()
@@ -68,15 +72,29 @@ export const profileSchema = z.object({
 });
 export type Profile = z.infer<typeof profileSchema>;
 
+/** Un rol dentro de una misma organizacion, para mostrar la progresion. */
+export const timelineRoleSchema = z.object({
+  role: bilingualSchema,
+  start: pending(dateSchema),
+  end: pending(dateSchema).nullable(),
+});
+export type TimelineRole = z.infer<typeof timelineRoleSchema>;
+
 export const timelineEntrySchema = z.object({
   id: z.string().min(1),
   kind: z.enum(["work", "education", "certification"]),
   org: z.string().min(1),
   orgLogo: z.string().startsWith("/").optional(),
-  start: pending(yearMonthSchema),
+  start: pending(dateSchema),
   /** null significa "en curso". El marcador TODO significa "no lo se todavia". */
-  end: pending(yearMonthSchema).nullable(),
+  end: pending(dateSchema).nullable(),
+  /** Rol de cabecera. En una organizacion con varios roles, el ultimo. */
   role: bilingualSchema,
+  /**
+   * Progresion dentro de la misma organizacion, de mas reciente a mas antiguo.
+   * Se omite cuando solo hubo un rol.
+   */
+  roles: z.array(timelineRoleSchema).optional(),
   summary: bilingualSchema,
   highlights: z.array(bilingualSchema),
   tags: z.array(competencyTagSchema),
@@ -94,15 +112,53 @@ export type TimelineEntry = z.infer<typeof timelineEntrySchema>;
  * nunca deben salir publicados. La comparacion no distingue mayusculas.
  */
 export const CONFIDENTIAL_TERMS = [
+  // Empleadores
   "giunti",
   "psychometrics",
   "ntt data",
+  // Sistemas de empleadores
+  "galileo",
+  "magento",
+  // Clientes de empleadores anteriores
+  "enel",
+  "banco de chile",
+  "telefonica",
+  "movistar",
+  "transbank",
+  "metlife",
+  "wom",
+  "afp habitat",
+  "evo payments",
+  "intercam",
+  "kupos",
+  "pasajebus",
+  "ticketsimply",
+  "inelectra",
+  "beconsult",
+  "chattigo",
+  "wultu",
 ] as const;
 
-/** Devuelve los terminos prohibidos que aparecen en un texto. */
+/** Minusculas y sin tildes, para que "Telefonica" y "Telefónica" sean lo mismo. */
+function normalize(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+/**
+ * Devuelve los terminos prohibidos que aparecen en un texto.
+ *
+ * Compara por palabra completa y no por subcadena: terminos cortos como "wom"
+ * dispararian falsos positivos dentro de palabras como "women".
+ */
 export function findConfidentialTerms(text: string): string[] {
-  const haystack = text.toLowerCase();
-  return CONFIDENTIAL_TERMS.filter((term) => haystack.includes(term));
+  const haystack = normalize(text);
+  return CONFIDENTIAL_TERMS.filter((term) => {
+    const escaped = normalize(term).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`\\b${escaped}\\b`).test(haystack);
+  });
 }
 
 export const projectSchema = z
@@ -171,11 +227,13 @@ export const metricSchema = z.object({
   id: z.string().min(1),
   /** Valor numerico para el contador animado. */
   value: pending(z.number().nonnegative()),
-  /** Se pinta pegado al numero: "+", "%", "k". */
+  /** Punto de partida, para las metricas de tipo "de X a Y". */
+  baseline: z.number().nonnegative().optional(),
+  /** Se pinta pegado al numero: "+", "%", "/5". */
   suffix: z.string().optional(),
   label: bilingualSchema,
-  /** De donde sale el numero. Si no se puede explicar, no se publica. */
-  source: bilingualSchema,
+  /** De donde sale el numero, cuando hace falta explicarlo. */
+  source: bilingualSchema.optional(),
 });
 export type Metric = z.infer<typeof metricSchema>;
 
