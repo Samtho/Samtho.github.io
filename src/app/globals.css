@@ -51,6 +51,8 @@
 }
 
 :root {
+  color-scheme: light;
+
   /* Base zinc (Tailwind v4) */
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -94,6 +96,8 @@
 }
 
 .dark {
+  color-scheme: dark;
+
   /* Base zinc (Tailwind v4) */
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);

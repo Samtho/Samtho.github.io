@@ -1,4 +1,28 @@
 {
+  "meta": {
+    "title": "Samuel Ortega · Product Manager",
+    "description": "Portfolio de Samuel Ortega, Product Manager de ecommerce multirregional en Madrid. Trayectoria, proyectos y forma de trabajar."
+  },
+  "nav": {
+    "skipToContent": "Saltar al contenido",
+    "languageShort": "EN",
+    "languageLabel": "Ver esta página en inglés",
+    "themeToDark": "Activar el modo oscuro",
+    "themeToLight": "Activar el modo claro"
+  },
+  "sections": {
+    "proof": "Por dónde he pasado",
+    "method": "Cómo trabajo",
+    "capabilities": "Qué sé hacer",
+    "timeline": "Trayectoria",
+    "projects": "Proyectos",
+    "metrics": "En números",
+    "faq": "Preguntas frecuentes",
+    "cta": "Hablemos"
+  },
+  "shell": {
+    "pending": "Sección en construcción."
+  },
   "tags": {
     "discovery": "Discovery",
     "strategy": "Estrategia",

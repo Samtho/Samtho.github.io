@@ -1,4 +1,28 @@
 {
+  "meta": {
+    "title": "Samuel Ortega · Product Manager",
+    "description": "Portfolio of Samuel Ortega, a multi-regional ecommerce Product Manager based in Madrid. Track record, projects and ways of working."
+  },
+  "nav": {
+    "skipToContent": "Skip to content",
+    "languageShort": "ES",
+    "languageLabel": "View this page in Spanish",
+    "themeToDark": "Switch to dark mode",
+    "themeToLight": "Switch to light mode"
+  },
+  "sections": {
+    "proof": "Where I have been",
+    "method": "How I work",
+    "capabilities": "What I do",
+    "timeline": "Track record",
+    "projects": "Projects",
+    "metrics": "By the numbers",
+    "faq": "Frequently asked questions",
+    "cta": "Let's talk"
+  },
+  "shell": {
+    "pending": "Section under construction."
+  },
   "tags": {
     "discovery": "Discovery",
     "strategy": "Strategy",

@@ -3,9 +3,9 @@ import { Landing } from "@/components/Landing";
 import { buildMetadata } from "@/lib/metadata";
 
 export function generateMetadata(): Metadata {
-  return buildMetadata("es");
+  return buildMetadata("en");
 }
 
-export default function Home() {
-  return <Landing locale="es" />;
+export default function EnglishHome() {
+  return <Landing locale="en" />;
 }

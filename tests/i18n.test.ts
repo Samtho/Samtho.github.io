@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { COMPETENCY_TAGS } from "@/data/schema";
+import { defaultLocale, locales, localePath } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
 import en from "@/i18n/dictionaries/en.json";
 import es from "@/i18n/dictionaries/es.json";
 import { dataModules, isBilingual, leafPaths, walk } from "./helpers";
@@ -49,5 +51,30 @@ describe("diccionarios de interfaz", () => {
 
   it("no sobra ninguna etiqueta de un tag que ya no existe", () => {
     expect(Object.keys(es.tags).sort()).toEqual([...COMPETENCY_TAGS].sort());
+  });
+});
+
+describe("rutas e idiomas", () => {
+  it("el espanol es el idioma por defecto y vive en la raiz", () => {
+    expect(defaultLocale).toBe("es");
+    expect(localePath.es).toBe("/");
+  });
+
+  it("cada idioma tiene una ruta propia y distinta", () => {
+    const paths = locales.map((locale) => localePath[locale]);
+    expect(paths).toHaveLength(locales.length);
+    expect(new Set(paths).size).toBe(paths.length);
+  });
+
+  it("getDictionary devuelve el diccionario del idioma pedido", () => {
+    expect(getDictionary("es").nav.skipToContent).toBe(es.nav.skipToContent);
+    expect(getDictionary("en").nav.skipToContent).toBe(en.nav.skipToContent);
+  });
+
+  // Traducir es el trabajo; dejar el texto del otro idioma no lo es.
+  it("ningun texto de navegacion quedo sin traducir", () => {
+    for (const key of Object.keys(es.nav) as Array<keyof typeof es.nav>) {
+      expect(es.nav[key], key).not.toBe(en.nav[key]);
+    }
   });
 });
