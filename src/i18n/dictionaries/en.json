@@ -99,7 +99,10 @@
     "stack": "Stack",
     "openNewTab": "Open in a new tab",
     "repo": "Repository",
-    "related": "Reads best alongside"
+    "related": "Reads best alongside",
+    "brief": "The brief",
+    "finding": "What we found",
+    "tools": "Tools"
   },
   "embed": {
     "load": "Load application",

@@ -99,7 +99,10 @@
     "stack": "Stack",
     "openNewTab": "Abrir en pestaña nueva",
     "repo": "Repositorio",
-    "related": "Se lee mejor junto a"
+    "related": "Se lee mejor junto a",
+    "brief": "El encargo",
+    "finding": "El hallazgo",
+    "tools": "Herramientas"
   },
   "embed": {
     "load": "Cargar aplicación",

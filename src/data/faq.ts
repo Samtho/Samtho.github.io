@@ -1,7 +1,12 @@
 import { z } from "zod";
-import { faqItemSchema, PENDING, type FaqItem } from "./schema";
+import { faqItemSchema, type FaqItem } from "./schema";
 
-/** Las preguntas que hace todo recruiter en los primeros cinco minutos. */
+/**
+ * Las preguntas que hace todo recruiter en los primeros cinco minutos.
+ *
+ * La de disponibilidad se quito a proposito: Sam esta empleado y esa
+ * respuesta no compensa el riesgo de publicarla.
+ */
 export const faq: FaqItem[] = z.array(faqItemSchema).parse([
   {
     id: "role",
@@ -9,15 +14,21 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       es: "¿Qué tipo de rol buscas?",
       en: "What kind of role are you looking for?",
     },
-    answer: { es: PENDING, en: PENDING },
+    answer: {
+      es: "Product Manager especializado en IA aplicada a producto. Me interesan equipos donde la IA forme parte del producto o del sistema de trabajo, no como capa de marketing.",
+      en: "A Product Manager focused on AI applied to the product. I am interested in teams where AI is part of the product or of the working system, not a marketing layer.",
+    },
   },
   {
     id: "work-mode",
     question: {
-      es: "¿Presencial, híbrido o remoto?",
-      en: "On-site, hybrid or remote?",
+      es: "¿En qué modalidad trabajas?",
+      en: "What working arrangement do you want?",
     },
-    answer: { es: PENDING, en: PENDING },
+    answer: {
+      es: "Remoto, con disponibilidad para viajar. He coordinado equipos en tres países y sé lo que cuesta que eso funcione.",
+      en: "Remote, with availability to travel. I have coordinated teams across three countries and I know what it takes to make that work.",
+    },
   },
   {
     id: "industries",
@@ -40,13 +51,5 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       es: "Español nativo, inglés C1, portugués B1 y alemán básico.",
       en: "Native Spanish, C1 English, B1 Portuguese and basic German.",
     },
-  },
-  {
-    id: "availability",
-    question: {
-      es: "¿Estás disponible ahora mismo?",
-      en: "Are you available right now?",
-    },
-    answer: { es: PENDING, en: PENDING },
   },
 ]);

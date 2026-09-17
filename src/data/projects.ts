@@ -167,8 +167,8 @@ export const projects: Project[] = z.array(projectSchema).parse([
       en: "Deciding whether to change a catalogue's genre mix for export gets done on editorial instinct, without looking at what actually sells abroad.",
     },
     role: {
-      es: "Producto y desarrollo, dentro de un equipo de cinco del máster.",
-      en: "Product and development, within a team of five on the master's programme.",
+      es: `Producto y desarrollo, dentro de un equipo de cinco del máster. ${PENDING}`,
+      en: `Product and development, within a team of five on the master's programme. ${PENDING}`,
     },
     decision: {
       es: "Dos registros visuales sobre los mismos datos. Uno para defender la conclusión en sala, otro para que cualquiera explore las cifras y llegue por su cuenta.",
@@ -227,39 +227,165 @@ export const projects: Project[] = z.array(projectSchema).parse([
     source: "personal",
   },
 
-  // Analisis. Sam rellena el contenido; la anatomia ya esta puesta.
-  ...["saludplus", "grupo-b", "logifast", "rentabilidad-ml"].map((id, index) => ({
-    id,
-    group: "analysis" as const,
-    name: ["SaludPlus", "Grupo B", "LogiFast", "Rentabilidad ML"][index],
-    tagline: { es: PENDING, en: PENDING },
-    year: PENDING,
-    problem: { es: PENDING, en: PENDING },
-    role: { es: PENDING, en: PENDING },
-    decision: { es: PENDING, en: PENDING },
-    stack: [],
-    tags: [],
+  // Analisis. Trabajos del master.
+  {
+    id: "saludplus",
+    group: "analysis",
+    name: "SaludPlus",
+    tagline: {
+      es: "Gobierno del dato para un grupo hospitalario.",
+      en: "Data governance for a hospital group.",
+    },
+    year: "2026",
+    problem: {
+      es: "Diseñar el modelo de gobierno del dato de un grupo hospitalario que crece por adquisiciones y tiene los datos de cada centro en un sistema distinto.",
+      en: "Design the data governance model for a hospital group that grows by acquisition and keeps each site's data in a different system.",
+    },
+    role: {
+      es: `Trabajo en equipo del máster. ${PENDING}`,
+      en: `Team project on the master's programme. ${PENDING}`,
+    },
+    decision: {
+      es: "La madurez se mide antes de proponer nada. Evaluamos al grupo contra CMMI y el roadmap salió de esa brecha real, en tres fases, en vez de salir de una lista de buenas prácticas genéricas.",
+      en: "Maturity gets measured before anything is proposed. We assessed the group against CMMI and the roadmap came out of that real gap, in three phases, instead of out of a generic best-practice list.",
+    },
+    stack: ["CMMI", "Estructura de gobernanza", "Business case"],
+    tags: ["data", "strategy"],
     embeds: [],
     confidential: false,
-    source: "personal" as const,
-  })),
+    source: "academic",
+  },
+  {
+    id: "grupo-b",
+    group: "analysis",
+    name: "Grupo B",
+    tagline: {
+      es: "Automatizar extracción documental en un equipo de finanzas.",
+      en: "Automating document extraction for a finance team.",
+    },
+    year: "2026",
+    problem: {
+      es: "Un equipo de finanzas sacaba datos estructurados de documentos a mano. Había que decidir con qué herramienta automatizarlo y justificar la inversión.",
+      en: "A finance team was pulling structured data out of documents by hand. The job was to decide which tool would automate it and to justify the spend.",
+    },
+    role: {
+      es: `Trabajo en equipo del máster. ${PENDING}`,
+      en: `Team project on the master's programme. ${PENDING}`,
+    },
+    decision: {
+      es: "La comparación entre Make y n8n se resolvió con coste real medido, no con una tabla de funcionalidades. El Go/No Go llevaba KPIs del proceso manual, así que el ahorro era comprobable.",
+      en: "The Make versus n8n comparison was settled on measured real cost, not on a feature table. The Go/No Go carried KPIs from the manual process, so the saving was verifiable.",
+    },
+    stack: ["Make", "n8n", "Gemini", "Prompt estructurado PRISMA"],
+    tags: ["data", "ai", "strategy"],
+    embeds: [],
+    confidential: false,
+    source: "academic",
+  },
+  {
+    id: "logifast",
+    group: "analysis",
+    name: "LogiFast",
+    tagline: {
+      es: "Modelo analítico para un escenario logístico.",
+      en: "An analytical model for a logistics scenario.",
+    },
+    year: "2026",
+    problem: {
+      es: "Convertir datos sucios de operación logística en un modelo capaz de responder preguntas de negocio.",
+      en: "Turn dirty logistics operations data into a model that can answer business questions.",
+    },
+    role: {
+      es: "Trabajo del máster.",
+      en: "Master's programme project.",
+    },
+    decision: {
+      es: "El trabajo de verdad estaba en la limpieza y en el modelo en estrella. Con el modelo bien montado, las medidas de inteligencia temporal salen casi solas.",
+      en: "The real work was in the cleaning and the star schema. With the model built right, the time intelligence measures almost write themselves.",
+    },
+    stack: ["Power BI", "ETL", "Modelo en estrella", "DAX"],
+    tags: ["data"],
+    embeds: [],
+    confidential: false,
+    source: "academic",
+  },
+  {
+    id: "rentabilidad-ml",
+    group: "analysis",
+    name: "Rentabilidad ML",
+    tagline: {
+      es: "Predecir si un pedido va a ser rentable.",
+      en: "Predicting whether an order will be profitable.",
+    },
+    year: "2026",
+    problem: {
+      es: "Clasificar pedidos de retail por rentabilidad sobre el dataset Sample Superstore, recorriendo el ciclo completo de machine learning.",
+      en: "Classify retail orders by profitability over the Sample Superstore dataset, walking the full machine learning cycle.",
+    },
+    role: {
+      es: "Trabajo del máster.",
+      en: "Master's programme project.",
+    },
+    decision: {
+      es: "El ciclo entero, de análisis exploratorio a evaluación, para ver dónde se decide de verdad la calidad de un modelo.",
+      en: "The whole cycle, from exploratory analysis to evaluation, to see where a model's quality actually gets decided.",
+    },
+    stack: ["Python", "pandas", "scikit-learn", "Notebooks"],
+    tags: ["data", "ai"],
+    embeds: [],
+    confidential: false,
+    source: "academic",
+  },
 
   // Sistema de IA.
-  ...["mis-skills", "integraciones-mcp"].map((id, index) => ({
-    id,
-    group: "ai" as const,
-    name: ["Mis skills", "Integraciones MCP"][index],
-    tagline: { es: PENDING, en: PENDING },
-    year: PENDING,
-    problem: { es: PENDING, en: PENDING },
-    role: { es: PENDING, en: PENDING },
-    decision: { es: PENDING, en: PENDING },
-    stack: [],
-    tags: [],
+  {
+    id: "mis-skills",
+    group: "ai",
+    name: "Mis skills",
+    tagline: {
+      es: "Mi trabajo, convertido en sistema.",
+      en: "My work, turned into a system.",
+    },
+    year: "2026",
+    problem: {
+      es: "Las tareas que más repito como PM tienen estructura fija: convertir una petición suelta en un ticket listo para desarrollo, resumir una reunión en decisiones y tareas con responsable, escribir un PRD. Las hacía a mano cada vez.",
+      en: "The tasks I repeat most as a PM have a fixed structure: turning a loose request into a ticket ready for development, condensing a meeting into decisions and owned tasks, writing a PRD. I was doing each one by hand every time.",
+    },
+    role: { es: "Diseño y construcción.", en: "Design and build." },
+    decision: {
+      es: "Cada skill codifica un criterio, no un formato. La de tickets no rellena una plantilla: aplica un umbral de calidad y no deja pasar un ticket sin criterios de aceptación.",
+      en: "Each skill encodes a standard, not a format. The ticket one does not fill in a template: it applies a quality bar and will not let a ticket through without acceptance criteria.",
+    },
+    stack: ["Claude Skills", "MCP"],
+    tags: ["ai", "delivery"],
     embeds: [],
     confidential: false,
-    source: "personal" as const,
-  })),
+    source: "personal",
+  },
+  {
+    id: "integraciones-mcp",
+    group: "ai",
+    name: "Integraciones MCP",
+    tagline: {
+      es: "Conectar el modelo a las herramientas donde trabajo.",
+      en: "Connecting the model to the tools I work in.",
+    },
+    year: "2026",
+    problem: {
+      es: "Un asistente que no ve tus datos ni tus tableros devuelve texto genérico.",
+      en: "An assistant that cannot see your data or your boards gives back generic text.",
+    },
+    role: { es: "Diseño y construcción.", en: "Design and build." },
+    decision: {
+      es: "Conectar el modelo directamente a Power BI y a Miro por MCP en vez de copiar y pegar contexto. Construí modelos en estrella con DAX y tablas de calendario contra una instancia local, y diagramas de arquitectura y tableros de retrospectiva en Miro.",
+      en: "Connect the model straight to Power BI and Miro over MCP instead of copying and pasting context. I built star schemas with DAX and calendar tables against a local instance, plus architecture diagrams and retrospective boards in Miro.",
+    },
+    stack: ["MCP", "Power BI", "DAX", "Miro"],
+    tags: ["ai", "data"],
+    embeds: [],
+    confidential: false,
+    source: "personal",
+  },
 ]);
 
 /**

@@ -1,8 +1,9 @@
 import { ArrowUpRightIcon, CodeXmlIcon } from "lucide-react";
-import { PENDING, type Project } from "@/data/schema";
+import type { Project } from "@/data/schema";
+import { PENDING as PENDING_MARK } from "@/data/schema";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/getDictionary";
-import { Pending } from "../Pending";
+import { PendingText } from "../Pending";
 import { LazyEmbed } from "./LazyEmbed";
 
 type Props = {
@@ -20,14 +21,25 @@ const EYEBROW = {
 } as const;
 
 /**
+ * Cada grupo nombra sus bloques como le corresponde. Un analisis no tiene
+ * "problema" y "decision": tiene un encargo y un hallazgo.
+ */
+const LABELS = {
+  apps: { first: "problem", third: "decision", fourth: "stack" },
+  analysis: { first: "brief", third: "finding", fourth: "tools" },
+  ai: { first: "problem", third: "decision", fourth: "tools" },
+} as const;
+
+/**
  * Anatomia fija de un panel con ficha. La ficha es el argumento y el embed
  * es la prueba, en ese orden y nunca al reves.
  */
 export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
+  const labels = LABELS[project.group];
   const blocks = [
-    { label: dictionary.panel.problem, value: project.problem[locale] },
+    { label: dictionary.panel[labels.first], value: project.problem[locale] },
     { label: dictionary.panel.myRole, value: project.role[locale] },
-    { label: dictionary.panel.decision, value: project.decision[locale] },
+    { label: dictionary.panel[labels.third], value: project.decision[locale] },
   ];
 
   return (
@@ -48,11 +60,7 @@ export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
           {project.name}
         </h1>
         <p className="mt-3 text-lg text-pretty text-muted-foreground">
-          {project.tagline[locale] === PENDING ? (
-            <Pending />
-          ) : (
-            project.tagline[locale]
-          )}
+          <PendingText value={project.tagline[locale]} />
         </p>
       </header>
 
@@ -63,18 +71,18 @@ export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
               {block.label}
             </dt>
             <dd className="mt-2 text-sm text-pretty">
-              {block.value === PENDING ? <Pending /> : block.value}
+              <PendingText value={block.value} />
             </dd>
           </div>
         ))}
 
         <div className="bg-card p-5">
           <dt className="font-mono text-[0.6875rem] tracking-[0.14em] text-muted-foreground uppercase">
-            {dictionary.panel.stack}
+            {dictionary.panel[labels.fourth]}
           </dt>
           <dd className="mt-2 flex flex-wrap gap-1.5">
             {project.stack.length === 0 ? (
-              <Pending />
+              <PendingText value={PENDING_MARK} />
             ) : (
               project.stack.map((item) => (
                 <span
@@ -108,7 +116,7 @@ export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
       ) : null}
 
       <div className="mt-6 flex flex-wrap gap-3">
-        {project.liveUrl && project.liveUrl !== PENDING ? (
+        {project.liveUrl && !project.liveUrl.includes(PENDING_MARK) ? (
           <a
             href={project.liveUrl}
             target="_blank"
@@ -120,7 +128,7 @@ export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
           </a>
         ) : null}
 
-        {project.repoUrl && project.repoUrl !== PENDING ? (
+        {project.repoUrl && !project.repoUrl.includes(PENDING_MARK) ? (
           <a
             href={project.repoUrl}
             target="_blank"

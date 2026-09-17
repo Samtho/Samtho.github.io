@@ -164,7 +164,11 @@ describe("marcadores visibles", () => {
 
     for (const { file, value } of dataModules) {
       walk(value, (leaf, path) => {
-        if (leaf === PENDING) pendings.push(`${file} en ${path}`);
+        // includes y no igualdad: el marcador puede ir incrustado en prosa,
+        // como en "Trabajo en equipo del máster. [por definir]".
+        if (typeof leaf === "string" && leaf.includes(PENDING)) {
+          pendings.push(`${file} en ${path}`);
+        }
       });
     }
 
