@@ -85,7 +85,9 @@
     "timeline": "Trayectoria",
     "method": "Método",
     "capabilities": "Competencias",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "appsTitle": "Siete aplicaciones, construidas y publicadas",
+    "appsLead": "Cada una se abre con su ficha encima y la aplicación debajo, usable sin salir de aquí."
   },
   "panel": {
     "kindApp": "App",
@@ -104,7 +106,8 @@
     "note": "No se carga sola, para no penalizar el rendimiento de la página.",
     "mobileOpen": "Abrir a pantalla completa",
     "mobileNote": "En móvil la aplicación se abre en otra pestaña.",
-    "frameTitle": "Aplicación embebida"
+    "frameTitle": "Aplicación embebida",
+    "openExternal": "Abrir fuera del sitio"
   },
   "mobile": {
     "more": "Más",

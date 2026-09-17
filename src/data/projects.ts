@@ -69,12 +69,11 @@ export const projects: Project[] = z.array(projectSchema).parse([
     tags: ["ai", "strategy", "discovery"],
     liveUrl: "https://samtho.github.io/umbral/",
     repoUrl: "https://github.com/Samtho/umbral",
-    embeds: [
-      {
-        label: { es: "Aplicación", en: "Application" },
-        url: "https://samtho.github.io/umbral/",
-      },
-    ],
+    // Sin embed a proposito. La portada publicada de Umbral usa como ejemplo
+    // de demo una linea del CV de Sam que nombra un sistema interno de su
+    // empleador, y embeberla lo traeria dentro de este sitio. Se activa en
+    // cuanto esa linea del repo umbral se escriba en generico.
+    embeds: [],
     related: "jano",
     confidential: false,
     source: "personal",
@@ -92,9 +91,15 @@ export const projects: Project[] = z.array(projectSchema).parse([
       en: "A working prototype in a single HTML file with localStorage persistence. Seven connected sections: garment inventory, outfit composition, calendar, laundry cycle, style profile and a recommendation engine combining rules, Open-Meteo data and an optional AI narrator.",
     },
     year: "2026",
-    problem: { es: PENDING, en: PENDING },
+    problem: {
+      es: "Tienes ropa que no te pones y cada mañana decides a ciegas, sin saber qué hay en el armario ni qué pega con el tiempo que va a hacer.",
+      en: "You own clothes you never wear, and every morning you decide blind, with no idea what is in the wardrobe or what suits the weather ahead.",
+    },
     role: { es: "Producto y desarrollo", en: "Product and development" },
-    decision: { es: PENDING, en: PENDING },
+    decision: {
+      es: "Motor de reglas con el clima real en vez de un modelo generativo. Una recomendación de ropa tiene que ser explicable, y tiene que funcionar sin depender de una API de pago.",
+      en: "A rules engine fed by real weather instead of a generative model. A clothing recommendation has to be explainable, and it has to work without depending on a paid API.",
+    },
     stack: ["HTML", "CSS", "JavaScript", "Open-Meteo"],
     tags: ["discovery", "ai"],
     liveUrl: "https://samtho.github.io/Aura-closet/",
@@ -117,10 +122,20 @@ export const projects: Project[] = z.array(projectSchema).parse([
       es: "Plantilla ligera de PI Planning.",
       en: "A lightweight PI Planning template.",
     },
+    description: {
+      es: "Conecta la certificación SAFe Lean Portfolio Manager con algo construido: épicas del quarter, capacidad y confianza por sprint, dependencias, OKRs, timeline y estado semanal, en una sola pantalla.",
+      en: "It connects the SAFe Lean Portfolio Manager certification with something actually built: quarter epics, capacity and confidence per sprint, dependencies, OKRs, timeline and weekly status, all on one screen.",
+    },
     year: "2026",
-    problem: { es: PENDING, en: PENDING },
-    role: { es: PENDING, en: PENDING },
-    decision: { es: PENDING, en: PENDING },
+    problem: {
+      es: "Planificar un quarter acaba repartido entre una hoja de cálculo, un tablero y una presentación, y ninguna de las tres cuadra con las otras dos.",
+      en: "Planning a quarter ends up split across a spreadsheet, a board and a deck, and none of the three agrees with the other two.",
+    },
+    role: { es: "Producto y desarrollo", en: "Product and development" },
+    decision: {
+      es: "Un solo archivo HTML, sin servidor ni cuentas. Arranca con un asistente de tres pasos y guarda en el navegador: la plantilla se abre y se usa, no se instala.",
+      en: "A single HTML file, with no server and no accounts. It starts with a three-step wizard and saves in the browser: the template opens and gets used, it does not get installed.",
+    },
     stack: ["HTML", "CSS", "JavaScript"],
     tags: ["agile", "delivery", "strategy"],
     liveUrl: "https://samtho.github.io/fantastic-management-quarter/",
@@ -147,9 +162,18 @@ export const projects: Project[] = z.array(projectSchema).parse([
       en: "Final master's project at INESDI, published with permission. It studies whether changing the catalogue's genre mix pays off for export.",
     },
     year: "2026",
-    problem: { es: PENDING, en: PENDING },
-    role: { es: PENDING, en: PENDING },
-    decision: { es: PENDING, en: PENDING },
+    problem: {
+      es: "Decidir si cambiar el mix de géneros de un catálogo para exportar se hace por intuición editorial, sin mirar qué se vende fuera.",
+      en: "Deciding whether to change a catalogue's genre mix for export gets done on editorial instinct, without looking at what actually sells abroad.",
+    },
+    role: {
+      es: "Producto y desarrollo, dentro de un equipo de cinco del máster.",
+      en: "Product and development, within a team of five on the master's programme.",
+    },
+    decision: {
+      es: "Dos registros visuales sobre los mismos datos. Uno para defender la conclusión en sala, otro para que cualquiera explore las cifras y llegue por su cuenta.",
+      en: "Two visual registers over the same data. One to defend the conclusion in the room, another so anyone can explore the figures and get there on their own.",
+    },
     stack: ["React", "Vite", "ECharts"],
     tags: ["data", "strategy"],
     liveUrl: "https://samtho.github.io/panoplia-defensa-v4/",
@@ -175,11 +199,21 @@ export const projects: Project[] = z.array(projectSchema).parse([
       es: "Catálogo personal de cine: el historial completo cruzado con 45.000 películas.",
       en: "A personal cinema catalogue: a full viewing history crossed with 45,000 films.",
     },
+    description: {
+      es: "Seis vistas sobre el mismo historial: la vida en cine en números, una galaxia de títulos, el grafo de conexiones, qué ver esta noche, un recomendador entrenado con el gusto propio y una mirada a la industria.",
+      en: "Six views over the same history: a life in cinema in numbers, a galaxy of titles, the graph of connections, what to watch tonight, a recommender trained on your own taste, and a look at the industry.",
+    },
     year: "2026",
-    problem: { es: PENDING, en: PENDING },
-    role: { es: PENDING, en: PENDING },
-    decision: { es: PENDING, en: PENDING },
-    stack: ["HTML", "CSS", "JavaScript"],
+    problem: {
+      es: "Un historial de visionado es una lista muerta: dice qué viste, no qué te gusta ni qué deberías ver esta noche.",
+      en: "A viewing history is a dead list: it says what you watched, not what you like or what you should watch tonight.",
+    },
+    role: { es: "Producto y desarrollo", en: "Product and development" },
+    decision: {
+      es: "Entrenar el recomendador con el gusto propio, no con el de la plataforma. El historial completo de Trakt se cruza con 45.000 películas, y el modelo aprende de lo que uno ha visto de verdad.",
+      en: "Train the recommender on your own taste, not the platform's. A full Trakt history is crossed with 45,000 films, and the model learns from what you actually watched.",
+    },
+    stack: ["HTML", "CSS", "JavaScript", "Trakt", "The Movies Dataset"],
     tags: ["data", "ai"],
     liveUrl: "https://samtho.github.io/the-movies-database/",
     repoUrl: "https://github.com/Samtho/the-movies-database",

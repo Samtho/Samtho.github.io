@@ -85,7 +85,9 @@
     "timeline": "Track record",
     "method": "Method",
     "capabilities": "Capabilities",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "appsTitle": "Seven applications, built and published",
+    "appsLead": "Each opens with its card on top and the application below, usable without leaving this page."
   },
   "panel": {
     "kindApp": "App",
@@ -104,7 +106,8 @@
     "note": "It does not load on its own, to keep the page fast.",
     "mobileOpen": "Open full screen",
     "mobileNote": "On mobile the application opens in another tab.",
-    "frameTitle": "Embedded application"
+    "frameTitle": "Embedded application",
+    "openExternal": "Open outside the site"
   },
   "mobile": {
     "more": "More",

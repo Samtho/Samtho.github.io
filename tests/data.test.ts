@@ -4,7 +4,7 @@ import { faq } from "@/data/faq";
 import { method } from "@/data/method";
 import { metrics } from "@/data/metrics";
 import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
+import { projects, projectsByGroup } from "@/data/projects";
 import {
   capabilitySchema,
   COMPETENCY_TAGS,
@@ -169,5 +169,27 @@ describe("marcadores visibles", () => {
     }
 
     expect(pendings, pendings.join("\n")).toEqual([]);
+  });
+});
+
+describe("las apps publicadas", () => {
+  /** Toda URL publicada del grupo de apps: la principal y la de cada embed. */
+  const publishedUrls = new Set(
+    projectsByGroup("apps").flatMap((app) => [
+      ...(app.liveUrl && app.liveUrl !== PENDING ? [app.liveUrl] : []),
+      ...app.embeds.map((embed) => embed.url),
+    ]),
+  );
+
+  // La rejilla titula "Siete aplicaciones, construidas y publicadas".
+  // Si el numero deja de cuadrar, el titular miente y este test lo dice.
+  it("son siete, como dice el titular de la rejilla", () => {
+    expect([...publishedUrls].sort()).toHaveLength(7);
+  });
+
+  it("todas apuntan a un sitio propio de Sam", () => {
+    for (const url of publishedUrls) {
+      expect(url, url).toMatch(/^https:\/\/samtho\.github\.io\//);
+    }
   });
 });

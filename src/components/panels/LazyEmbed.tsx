@@ -1,6 +1,6 @@
 "use client";
 
-import { MonitorPlayIcon } from "lucide-react";
+import { ArrowUpRightIcon, PlayIcon } from "lucide-react";
 import { useState } from "react";
 import type { Embed } from "@/data/schema";
 import type { Locale } from "@/i18n/config";
@@ -13,10 +13,18 @@ type Props = {
   dictionary: Dictionary["embed"];
 };
 
+/** La URL sin protocolo, como la pinta la barra de un navegador. */
+function pretty(url: string): string {
+  return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+}
+
 /**
- * El iframe no se monta al abrir el panel: primero un marco con un boton.
- * Cargar seis aplicaciones de golpe hunde el rendimiento de la pagina, y ese
- * es justo el motivo de la regla.
+ * Marco de aplicacion. Se lee como una ventana de navegador: barra con la URL
+ * arriba y el contenido debajo.
+ *
+ * El iframe no se monta al abrir el panel, solo al pulsar. Cargar seis
+ * aplicaciones de golpe hunde el rendimiento de la pagina, y ese es el motivo
+ * de la regla.
  */
 export function LazyEmbed({ embeds, name, locale, dictionary }: Props) {
   const [active, setActive] = useState(0);
@@ -50,44 +58,52 @@ export function LazyEmbed({ embeds, name, locale, dictionary }: Props) {
         </div>
       ) : null}
 
-      {/* En movil no hay iframe: la app se abre a pantalla completa. */}
+      {/* En movil no hay iframe: la aplicacion se abre a pantalla completa. */}
       <div className="md:hidden">
-        <div className="rounded-xl border border-border bg-card p-6 text-center">
-          <p className="font-display text-lg font-medium">{name}</p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {dictionary.mobileNote}
-          </p>
-          <a
-            href={current.url}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          >
-            {dictionary.mobileOpen}
-          </a>
+        <div className="overflow-hidden rounded-xl border border-border bg-card">
+          <FrameBar url={current.url} label={dictionary.openExternal} />
+          <div className="flex flex-col items-center gap-3 px-5 py-8 text-center">
+            <p className="font-display text-lg font-medium">{name}</p>
+            <p className="max-w-[30ch] text-sm text-muted-foreground">
+              {dictionary.mobileNote}
+            </p>
+            <a
+              href={current.url}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-1 flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-4 py-3 text-sm font-medium text-brand-foreground"
+            >
+              {dictionary.mobileOpen}
+              <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="hidden md:block">
+      {/*
+        El borde y la barra separan la aplicacion del sitio. Hace falta en modo
+        oscuro sobre todo: la app de dentro trae su propio tema y puede venir
+        en claro, asi que el limite no puede depender del color de fondo.
+      */}
+      <div className="hidden overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border md:block">
+        <FrameBar url={current.url} label={dictionary.openExternal} />
+
         {loaded ? (
           <iframe
             src={current.url}
             title={`${name} · ${dictionary.frameTitle}`}
             loading="lazy"
-            className="h-[640px] w-full rounded-xl border border-border bg-card"
+            className="block h-[640px] w-full border-0 bg-card"
           />
         ) : (
-          <div className="flex h-[640px] w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-border bg-card">
-            <MonitorPlayIcon
-              className="size-8 text-muted-foreground"
-              aria-hidden="true"
-            />
+          <div className="flex h-[640px] w-full flex-col items-center justify-center gap-4 bg-muted/40">
             <p className="font-display text-xl font-medium">{name}</p>
             <button
               type="button"
               onClick={() => setLoaded(true)}
-              className="rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
+              <PlayIcon className="size-4" aria-hidden="true" />
               {dictionary.load}
             </button>
             <p className="max-w-[34ch] text-center text-xs text-muted-foreground">
@@ -96,6 +112,32 @@ export function LazyEmbed({ embeds, name, locale, dictionary }: Props) {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+/** Barra superior del marco: la URL y un boton para abrir fuera. */
+function FrameBar({ url, label }: { url: string; label: string }) {
+  return (
+    <div className="flex items-center gap-3 border-b border-border bg-muted/50 px-3 py-2">
+      <span className="flex gap-1.5" aria-hidden="true">
+        <span className="size-2.5 rounded-full bg-border" />
+        <span className="size-2.5 rounded-full bg-border" />
+        <span className="size-2.5 rounded-full bg-border" />
+      </span>
+      <span className="min-w-0 flex-1 truncate rounded-md bg-background px-2.5 py-1 font-mono text-xs text-muted-foreground">
+        {pretty(url)}
+      </span>
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={label}
+        title={label}
+        className="shrink-0 rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      >
+        <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+      </a>
     </div>
   );
 }
