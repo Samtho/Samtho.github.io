@@ -19,11 +19,11 @@ export const PENDING = "[por definir]";
 
 /**
  * Envuelve un esquema restrictivo (fecha, URL, email) para que tambien acepte
- * el marcador de pendiente. Los campos de texto libre no lo necesitan: TODO ya
- * es una cadena no vacia y pasa su validacion.
+ * cualquiera de los dos marcadores de pendiente. Los campos de texto libre no
+ * lo necesitan: ambos marcadores son cadenas no vacias y pasan su validacion.
  */
 const pending = <T extends z.ZodType>(schema: T) =>
-  z.union([schema, z.literal(TODO)]);
+  z.union([schema, z.literal(TODO), z.literal(PENDING)]);
 
 /** Todo texto visible existe en los dos idiomas. Sin excepciones. */
 export const bilingualSchema = z.object({
@@ -193,18 +193,34 @@ export function findConfidentialTerms(text: string): string[] {
   });
 }
 
+/** Un embed dentro de un panel. Panoplia tiene dos, en pestanas internas. */
+export const embedSchema = z.object({
+  label: bilingualSchema,
+  url: z.url(),
+});
+export type Embed = z.infer<typeof embedSchema>;
+
 export const projectSchema = z
   .object({
     id: z.string().min(1),
+    /** Grupo de la barra lateral en el que aparece el panel. */
+    group: z.enum(["apps", "analysis", "ai"]),
     name: z.string().min(1),
+    /** Subtitulo de la ficha: una frase de que hace. */
     tagline: bilingualSchema,
-    description: bilingualSchema,
+    description: bilingualSchema.optional(),
     year: pending(yearSchema),
+    // Los cuatro bloques de la ficha, en su orden de lectura.
+    problem: bilingualSchema,
     role: bilingualSchema,
+    decision: bilingualSchema,
     stack: z.array(z.string().min(1)),
     tags: z.array(competencyTagSchema),
     liveUrl: pending(z.url()).optional(),
     repoUrl: pending(z.url()).optional(),
+    embeds: z.array(embedSchema).default([]),
+    /** id de otro panel con el que este se lee mejor. */
+    related: z.string().optional(),
     /** Obligatorio y sin valor por defecto: obliga a decidir en cada proyecto. */
     confidential: z.boolean(),
     source: z.enum(["personal", "academic", "employer"]),
@@ -227,8 +243,16 @@ export const projectSchema = z
       ["name", project.name],
       ["tagline.es", project.tagline.es],
       ["tagline.en", project.tagline.en],
-      ["description.es", project.description.es],
-      ["description.en", project.description.en],
+      ["problem.es", project.problem.es],
+      ["problem.en", project.problem.en],
+      ["decision.es", project.decision.es],
+      ["decision.en", project.decision.en],
+      ...(project.description
+        ? ([
+            ["description.es", project.description.es],
+            ["description.en", project.description.en],
+          ] as Array<[string, string]>)
+        : []),
     ];
 
     for (const [field, text] of publicText) {

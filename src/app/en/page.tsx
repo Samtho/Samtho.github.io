@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Landing } from "@/components/Landing";
+import { AppShell } from "@/components/AppShell";
 import { buildMetadata } from "@/lib/metadata";
 
 export function generateMetadata(): Metadata {
@@ -7,5 +7,5 @@ export function generateMetadata(): Metadata {
 }
 
 export default function EnglishHome() {
-  return <Landing locale="en" />;
+  return <AppShell locale="en" />;
 }

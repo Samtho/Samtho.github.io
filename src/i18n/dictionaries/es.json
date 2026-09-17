@@ -72,5 +72,43 @@
     "ai": "IA aplicada",
     "agile": "Agilidad",
     "stakeholders": "Stakeholders"
+  },
+  "sidebar": {
+    "role": "Product Manager · Madrid",
+    "availability": "Disponible para conversar",
+    "groupProfile": "Perfil",
+    "groupApps": "Apps",
+    "groupAnalysis": "Análisis",
+    "groupAi": "Sistema IA",
+    "overview": "Overview",
+    "nav": "Navegación principal",
+    "timeline": "Trayectoria",
+    "method": "Método",
+    "capabilities": "Competencias",
+    "faq": "FAQ"
+  },
+  "panel": {
+    "kindApp": "App",
+    "kindAnalysis": "Análisis",
+    "kindAi": "Sistema IA",
+    "problem": "El problema",
+    "myRole": "Mi papel",
+    "decision": "La decisión",
+    "stack": "Stack",
+    "openNewTab": "Abrir en pestaña nueva",
+    "repo": "Repositorio",
+    "related": "Se lee mejor junto a"
+  },
+  "embed": {
+    "load": "Cargar aplicación",
+    "note": "No se carga sola, para no penalizar el rendimiento de la página.",
+    "mobileOpen": "Abrir a pantalla completa",
+    "mobileNote": "En móvil la aplicación se abre en otra pestaña.",
+    "frameTitle": "Aplicación embebida"
+  },
+  "mobile": {
+    "more": "Más",
+    "close": "Cerrar",
+    "menu": "Abrir el menú"
   }
 }

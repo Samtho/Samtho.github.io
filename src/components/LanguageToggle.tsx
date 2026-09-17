@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
 import { localePath, type Locale } from "@/i18n/config";
 
@@ -12,18 +11,20 @@ type Props = {
 };
 
 export function LanguageToggle({ locale, label, short }: Props) {
-  const router = useRouter();
   const target = locale === "es" ? localePath.en : localePath.es;
 
   /**
-   * Conserva el ancla al cambiar de idioma: si estabas leyendo #projects,
-   * sigues ahi en el otro idioma. Sin hash, Link navega como siempre.
+   * Conserva el panel al cambiar de idioma: si estabas en #jano, sigues ahi
+   * en el otro idioma.
+   *
+   * Navegacion completa y no router.push: los paneles se enrutan con :target,
+   * y el navegador no reevalua esa pseudoclase en una navegacion de cliente.
    */
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     const { hash } = window.location;
     if (!hash) return;
     event.preventDefault();
-    router.push(`${target}${hash}`);
+    window.location.assign(`${target}${hash}`);
   }
 
   return (

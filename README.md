@@ -1,7 +1,10 @@
 # samtho.github.io
 
-Portfolio personal de Samuel Ortega. Sitio estático en Next.js, bilingüe,
-desplegado en GitHub Pages con GitHub Actions.
+Portfolio personal de Samuel Ortega. **Aplicación con barra lateral y paneles**,
+no una landing con scroll: el producto es la trayectoria y la prueba son las
+aplicaciones, embebidas y usables dentro de la propia web.
+
+Sitio estático en Next.js, bilingüe, desplegado en GitHub Pages con Actions.
 
 - Español: <https://samtho.github.io>
 - Inglés: <https://samtho.github.io/en/>
@@ -28,28 +31,47 @@ npm run dev            # http://localhost:3000
 Para los tests end to end hace falta el navegador una sola vez:
 `npx playwright install chromium`.
 
-## Añadir un proyecto
+## Añadir una app
 
-Todo el contenido vive en `src/data/`. Para publicar un proyecto nuevo se edita
-**solo** `src/data/projects.ts`: se añade un objeto al array y ya aparece en la
-página, en los dos idiomas.
+Todo el contenido vive en `src/data/`. Para publicar una app nueva se edita
+**solo** `src/data/projects.ts`: se añade un objeto al array y aparecen solos
+su entrada en la barra lateral, su tarjeta en la rejilla y su panel completo,
+en los dos idiomas.
 
 ```ts
 {
-  id: "mi-proyecto",
-  name: "Mi Proyecto",
-  tagline: { es: "Una frase.", en: "One line." },
-  description: { es: "Qué es y qué resuelve.", en: "What it is and what it solves." },
+  id: "mi-app",                       // tambien es el hash: /#mi-app
+  group: "apps",                      // "apps" | "analysis" | "ai"
+  name: "Mi App",
+  tagline: { es: "Una frase de qué hace.", en: "One line on what it does." },
   year: "2026",
-  role: { es: "Producto y desarrollo", en: "Product and development" },
+  problem: { es: "Qué duele.", en: "What hurts." },
+  role: { es: "Mi papel.", en: "My part." },
+  decision: { es: "La decisión que la define.", en: "The call that defines it." },
   stack: ["Next.js", "TypeScript"],
   tags: ["delivery"],                 // del enum de COMPETENCY_TAGS
   liveUrl: "https://ejemplo.com",     // opcional
   repoUrl: "https://github.com/...",  // opcional
+  embeds: [                           // vacio si no se embebe
+    { label: { es: "Aplicación", en: "Application" }, url: "https://ejemplo.com" },
+  ],
+  related: "otra-app",                // opcional, enlaza dos paneles hermanos
   confidential: false,
   source: "personal",                 // "personal" | "academic" | "employer"
 }
 ```
+
+### Antes de embeber una app, mírala
+
+El embed pone la aplicación a un clic de un recruiter. Comprueba que la versión
+publicada no arrastra datos reales de ningún empleador: nombres de personas,
+clientes, costes o métricas de negocio. Si los arrastra, no se embebe.
+
+### Los embeds son perezosos, y no es negociable
+
+El iframe se monta al pulsar "Cargar aplicación", nunca al abrir el panel.
+Cargar seis aplicaciones de golpe hunde Lighthouse, que es el motivo de la
+regla. Un test e2e comprueba que no hay ningún iframe antes de pulsar.
 
 ### La regla de confidencialidad
 
@@ -77,6 +99,7 @@ palabras completas.
 |---|---|
 | `src/data/profile.ts` | Nombre, titular, bio, contacto, ruta del CV y de la foto |
 | `src/data/timeline.ts` | Trabajo, formación y certificaciones |
+| `src/lib/nav.ts` | Estructura de la barra lateral; los contadores salen de los datos |
 | `src/data/capabilities.ts` | Las siete competencias |
 | `src/data/method.ts` | Los tres pasos de método |
 | `src/data/metrics.ts` | Los números de la trayectoria |

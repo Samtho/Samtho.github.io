@@ -148,3 +148,64 @@ test.describe("shell", () => {
     expect(response.status()).toBe(200);
   });
 });
+
+test.describe("paneles", () => {
+  test("solo hay un panel visible a la vez", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("[data-panel]:visible")).toHaveCount(1);
+    await expect(page.locator("[data-panel]:visible")).toHaveAttribute(
+      "data-panel",
+      "overview",
+    );
+  });
+
+  test("un enlace directo abre su panel, sin pasar por overview", async ({
+    page,
+  }) => {
+    await page.goto("/#jano");
+    const visible = page.locator("[data-panel]:visible");
+    await expect(visible).toHaveCount(1);
+    await expect(visible).toHaveAttribute("data-panel", "jano");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Jano");
+  });
+
+  test("el enlace de la barra marca el panel activo", async ({ page }) => {
+    await page.goto("/#umbral");
+    await expect(page.locator('[data-nav="umbral"]').first()).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+  });
+
+  test("cambiar de idioma no te saca del panel", async ({ page }) => {
+    await page.goto("/#jano");
+    await page.getByRole("link", { name: "Ver esta página en inglés" }).click();
+    await expect(page).toHaveURL(/\/en\/#jano$/);
+    await expect(page.locator("[data-panel]:visible")).toHaveAttribute(
+      "data-panel",
+      "jano",
+    );
+  });
+
+  // La regla que sostiene los 97 de Lighthouse.
+  test("el iframe no existe hasta pulsar el boton", async ({ page }) => {
+    await page.goto("/#jano");
+    await expect(page.locator("iframe")).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Cargar aplicación" }).click();
+    await expect(page.locator("iframe")).toHaveCount(1);
+    await expect(page.locator("iframe")).toHaveAttribute(
+      "src",
+      "https://samtho.github.io/jano-web/",
+    );
+  });
+
+  test("Jano y Umbral se enlazan entre si", async ({ page }) => {
+    await page.goto("/#jano");
+    await page.getByRole("link", { name: "Umbral", exact: true }).first().click();
+    await expect(page.locator("[data-panel]:visible")).toHaveAttribute(
+      "data-panel",
+      "umbral",
+    );
+  });
+});

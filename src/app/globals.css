@@ -11,8 +11,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-bricolage);
-  --font-heading: var(--font-bricolage);
+  --font-display: var(--font-outfit);
+  --font-heading: var(--font-outfit);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -54,88 +54,86 @@
 :root {
   color-scheme: light;
 
-  /* Base zinc (Tailwind v4) */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
+  /* Crema calido. El papel de la pagina, no blanco puro. */
+  --background: oklch(0.977 0.009 84);
+  --foreground: oklch(0.215 0.008 70);
+  --card: oklch(0.994 0.005 84);
+  --card-foreground: oklch(0.215 0.008 70);
+  --popover: oklch(0.994 0.005 84);
+  --popover-foreground: oklch(0.215 0.008 70);
 
-  /* Acento del proyecto: indigo */
+  /* Indigo, unico acento del sistema. */
   --primary: oklch(0.511 0.262 276.966);
   --primary-foreground: oklch(0.985 0 0);
   --brand: oklch(0.511 0.262 276.966);
   --brand-foreground: oklch(0.985 0 0);
-  --ring: oklch(0.585 0.233 277.117);
+  --ring: oklch(0.511 0.262 276.966);
 
-  /* Grises de apoyo, todos zinc */
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
+  --secondary: oklch(0.948 0.012 84);
+  --secondary-foreground: oklch(0.215 0.008 70);
+  --muted: oklch(0.948 0.012 84);
+  --muted-foreground: oklch(0.487 0.012 75);
+  --accent: oklch(0.935 0.014 84);
+  --accent-foreground: oklch(0.215 0.008 70);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
+  --border: oklch(0.888 0.013 84);
+  --input: oklch(0.888 0.013 84);
 
   --chart-1: oklch(0.511 0.262 276.966);
   --chart-2: oklch(0.673 0.182 276.935);
   --chart-3: oklch(0.785 0.115 274.713);
-  --chart-4: oklch(0.552 0.016 285.938);
-  --chart-5: oklch(0.37 0.013 285.805);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
+  --chart-4: oklch(0.487 0.012 75);
+  --chart-5: oklch(0.365 0.011 75);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.962 0.011 84);
+  --sidebar-foreground: oklch(0.215 0.008 70);
   --sidebar-primary: oklch(0.511 0.262 276.966);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.585 0.233 277.117);
+  --sidebar-accent: oklch(0.935 0.014 84);
+  --sidebar-accent-foreground: oklch(0.215 0.008 70);
+  --sidebar-border: oklch(0.888 0.013 84);
+  --sidebar-ring: oklch(0.511 0.262 276.966);
 }
 
 .dark {
   color-scheme: dark;
 
-  /* Base zinc (Tailwind v4) */
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
+  /* Negro real. Las tarjetas se levantan del fondo, no al reves. */
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.967 0 0);
+  --card: oklch(0.158 0 0);
+  --card-foreground: oklch(0.967 0 0);
+  --popover: oklch(0.158 0 0);
+  --popover-foreground: oklch(0.967 0 0);
 
-  /* Indigo mas claro para mantener contraste sobre fondo oscuro */
   --primary: oklch(0.673 0.182 276.935);
-  --primary-foreground: oklch(0.141 0.005 285.823);
+  --primary-foreground: oklch(0.145 0 0);
   --brand: oklch(0.673 0.182 276.935);
-  --brand-foreground: oklch(0.141 0.005 285.823);
+  --brand-foreground: oklch(0.145 0 0);
   --ring: oklch(0.673 0.182 276.935);
 
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.205 0 0);
+  --secondary-foreground: oklch(0.967 0 0);
+  --muted: oklch(0.185 0 0);
+  --muted-foreground: oklch(0.715 0 0);
+  --accent: oklch(0.242 0 0);
+  --accent-foreground: oklch(0.967 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --border: oklch(0.268 0 0);
+  --input: oklch(0.302 0 0);
 
   --chart-1: oklch(0.673 0.182 276.935);
   --chart-2: oklch(0.785 0.115 274.713);
   --chart-3: oklch(0.87 0.065 274.039);
-  --chart-4: oklch(0.705 0.015 286.067);
-  --chart-5: oklch(0.552 0.016 285.938);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --chart-4: oklch(0.715 0 0);
+  --chart-5: oklch(0.55 0 0);
+  --sidebar: oklch(0.09 0 0);
+  --sidebar-foreground: oklch(0.967 0 0);
   --sidebar-primary: oklch(0.673 0.182 276.935);
-  --sidebar-primary-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-primary-foreground: oklch(0.145 0 0);
+  --sidebar-accent: oklch(0.242 0 0);
+  --sidebar-accent-foreground: oklch(0.967 0 0);
+  --sidebar-border: oklch(0.268 0 0);
   --sidebar-ring: oklch(0.673 0.182 276.935);
 }
 
@@ -152,59 +150,27 @@
 }
 @layer components {
   /**
-   * La espina: un hilo continuo que recorre la pagina con un nodo por seccion.
-   * Es la firma visual del sitio y tambien su estructura: la timeline del
-   * Milestone 4 es esta misma linea, hecha explicita.
+   * Enrutado de paneles con :target.
+   *
+   * Se resuelve en CSS y no con estado de React a proposito: al abrir un
+   * enlace directo a un panel no hay ni un fotograma con el panel equivocado,
+   * y sin JavaScript la pagina degrada a un documento largo y legible.
+   *
+   * La clase has-panels la pone el script de arranque, antes de pintar.
    */
-  .spine {
-    position: relative;
+  .has-panels [data-panel] {
+    display: none;
   }
 
-  .spine::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 1px;
-    background: var(--border);
+  .has-panels [data-panel]:target {
+    display: block;
   }
 
-  /* El tramo ya recorrido. Marca por donde vas de la trayectoria. */
-  .spine::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: var(--spine-progress, 0%);
-    background: var(--brand);
+  /* Sin hash, manda Overview. */
+  .has-panels:not(:has([data-panel]:target)) [data-panel="overview"] {
+    display: block;
   }
 
-  .spine-node::after {
-    content: "";
-    position: absolute;
-    top: 0.45rem;
-    left: -0.3125rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-radius: 9999px;
-    border: 1px solid var(--border);
-    background: var(--background);
-    transition:
-      background-color 400ms ease,
-      border-color 400ms ease,
-      transform 400ms ease;
-  }
-
-  .spine-node[data-lit="true"]::after {
-    background: var(--brand);
-    border-color: var(--brand);
-    transform: scale(1.15);
-  }
-}
-
-@layer components {
   /**
    * Entrada de la timeline. Se queda en el DOM y colapsa a altura cero con el
    * truco de grid 1fr/0fr, que es lo unico que permite animar aparicion y

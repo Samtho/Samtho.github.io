@@ -1,0 +1,146 @@
+import { ArrowUpRightIcon, CodeXmlIcon } from "lucide-react";
+import { PENDING, type Project } from "@/data/schema";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/getDictionary";
+import { Pending } from "../Pending";
+import { LazyEmbed } from "./LazyEmbed";
+
+type Props = {
+  project: Project;
+  locale: Locale;
+  dictionary: Dictionary;
+  /** Nombre del panel hermano, cuando este se lee mejor junto a otro. */
+  relatedName?: string;
+};
+
+const EYEBROW = {
+  apps: "kindApp",
+  analysis: "kindAnalysis",
+  ai: "kindAi",
+} as const;
+
+/**
+ * Anatomia fija de un panel con ficha. La ficha es el argumento y el embed
+ * es la prueba, en ese orden y nunca al reves.
+ */
+export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
+  const blocks = [
+    { label: dictionary.panel.problem, value: project.problem[locale] },
+    { label: dictionary.panel.myRole, value: project.role[locale] },
+    { label: dictionary.panel.decision, value: project.decision[locale] },
+  ];
+
+  return (
+    <section
+      id={project.id}
+      data-panel={project.id}
+      aria-labelledby={`${project.id}-title`}
+      className="scroll-mt-4 px-5 py-8 sm:px-8 sm:py-12"
+    >
+      <header className="max-w-[60ch]">
+        <p className="font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">
+          {dictionary.panel[EYEBROW[project.group]]}
+        </p>
+        <h1
+          id={`${project.id}-title`}
+          className="mt-2 font-display text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+        >
+          {project.name}
+        </h1>
+        <p className="mt-3 text-lg text-pretty text-muted-foreground">
+          {project.tagline[locale] === PENDING ? (
+            <Pending />
+          ) : (
+            project.tagline[locale]
+          )}
+        </p>
+      </header>
+
+      <dl className="mt-8 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
+        {blocks.map((block) => (
+          <div key={block.label} className="bg-card p-5">
+            <dt className="font-mono text-[0.6875rem] tracking-[0.14em] text-muted-foreground uppercase">
+              {block.label}
+            </dt>
+            <dd className="mt-2 text-sm text-pretty">
+              {block.value === PENDING ? <Pending /> : block.value}
+            </dd>
+          </div>
+        ))}
+
+        <div className="bg-card p-5">
+          <dt className="font-mono text-[0.6875rem] tracking-[0.14em] text-muted-foreground uppercase">
+            {dictionary.panel.stack}
+          </dt>
+          <dd className="mt-2 flex flex-wrap gap-1.5">
+            {project.stack.length === 0 ? (
+              <Pending />
+            ) : (
+              project.stack.map((item) => (
+                <span
+                  key={item}
+                  className="rounded border border-border px-1.5 py-0.5 font-mono text-xs text-muted-foreground"
+                >
+                  {item}
+                </span>
+              ))
+            )}
+          </dd>
+        </div>
+      </dl>
+
+      {project.description ? (
+        <p className="mt-6 max-w-[68ch] text-sm text-pretty text-muted-foreground">
+          {project.description[locale]}
+        </p>
+      ) : null}
+
+      {project.related && relatedName ? (
+        <p className="mt-6 text-sm text-muted-foreground">
+          {dictionary.panel.related}{" "}
+          <a
+            href={`#${project.related}`}
+            className="font-medium text-brand hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            {relatedName}
+          </a>
+        </p>
+      ) : null}
+
+      <div className="mt-6 flex flex-wrap gap-3">
+        {project.liveUrl && project.liveUrl !== PENDING ? (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            {dictionary.panel.openNewTab}
+            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+          </a>
+        ) : null}
+
+        {project.repoUrl && project.repoUrl !== PENDING ? (
+          <a
+            href={project.repoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            <CodeXmlIcon className="size-3.5" aria-hidden="true" />
+            {dictionary.panel.repo}
+          </a>
+        ) : null}
+      </div>
+
+      {project.embeds.length > 0 ? (
+        <LazyEmbed
+          embeds={project.embeds}
+          name={project.name}
+          locale={locale}
+          dictionary={dictionary.embed}
+        />
+      ) : null}
+    </section>
+  );
+}

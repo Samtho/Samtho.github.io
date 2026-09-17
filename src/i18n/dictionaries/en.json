@@ -72,5 +72,43 @@
     "ai": "Applied AI",
     "agile": "Agile",
     "stakeholders": "Stakeholders"
+  },
+  "sidebar": {
+    "role": "Product Manager · Madrid",
+    "availability": "Open to a conversation",
+    "groupProfile": "Profile",
+    "groupApps": "Apps",
+    "groupAnalysis": "Analysis",
+    "groupAi": "AI system",
+    "overview": "Overview",
+    "nav": "Main navigation",
+    "timeline": "Track record",
+    "method": "Method",
+    "capabilities": "Capabilities",
+    "faq": "FAQ"
+  },
+  "panel": {
+    "kindApp": "App",
+    "kindAnalysis": "Analysis",
+    "kindAi": "AI system",
+    "problem": "The problem",
+    "myRole": "My part",
+    "decision": "The call",
+    "stack": "Stack",
+    "openNewTab": "Open in a new tab",
+    "repo": "Repository",
+    "related": "Reads best alongside"
+  },
+  "embed": {
+    "load": "Load application",
+    "note": "It does not load on its own, to keep the page fast.",
+    "mobileOpen": "Open full screen",
+    "mobileNote": "On mobile the application opens in another tab.",
+    "frameTitle": "Embedded application"
+  },
+  "mobile": {
+    "more": "More",
+    "close": "Close",
+    "menu": "Open the menu"
   }
 }

@@ -15,11 +15,13 @@ import { timeline } from "@/data/timeline";
 
 const validProject = {
   id: "ejemplo",
+  group: "apps",
   name: "Ejemplo",
   tagline: { es: "Una frase", en: "One line" },
-  description: { es: "Una descripcion", en: "A description" },
   year: "2026",
+  problem: { es: "Un problema", en: "A problem" },
   role: { es: "Producto", en: "Product" },
+  decision: { es: "Una decision", en: "A call" },
   stack: ["React"],
   tags: ["delivery"],
   confidential: false,
@@ -75,8 +77,13 @@ describe("lista negra", () => {
         project.name,
         project.tagline.es,
         project.tagline.en,
-        project.description.es,
-        project.description.en,
+        project.problem.es,
+        project.problem.en,
+        project.decision.es,
+        project.decision.en,
+        ...(project.description
+          ? [project.description.es, project.description.en]
+          : []),
       ];
       for (const text of texts) {
         expect(findConfidentialTerms(text), `${project.id}: ${text}`).toEqual(
@@ -95,6 +102,20 @@ describe("lista negra", () => {
       },
     });
     expect(result.success).toBe(false);
+  });
+
+  // Los bloques nuevos de la ficha entran por la misma puerta que el resto.
+  it("el esquema tambien revisa el problema y la decision", () => {
+    for (const field of ["problem", "decision"] as const) {
+      const result = projectSchema.safeParse({
+        ...validProject,
+        [field]: {
+          es: "Migracion del catalogo en Magento",
+          en: "Catalogue migration on Magento",
+        },
+      });
+      expect(result.success, field).toBe(false);
+    }
   });
 
   it("no distingue mayusculas", () => {

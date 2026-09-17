@@ -1,4 +1,4 @@
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import { defaultLocale } from "@/i18n/config";
 import "./globals.css";
 
@@ -12,9 +12,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Display. Grotesca con caracter propia, usada solo en titulares y cifras.
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+// Display. Sans geometrica, solo en titulares y cifras.
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
 });
@@ -40,6 +40,9 @@ const bootstrapScript = `(function () {
       document.documentElement.lang = "en";
     }
   } catch (error) {}
+  // Activa el enrutado de paneles antes de pintar. Sin esta clase la pagina
+  // se sirve como un documento largo, que es la degradacion sin JavaScript.
+  document.documentElement.classList.add("has-panels");
 })();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -47,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang={defaultLocale}
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <script dangerouslySetInnerHTML={{ __html: bootstrapScript }} />
