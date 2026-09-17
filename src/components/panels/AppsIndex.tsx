@@ -21,8 +21,9 @@ export function AppsIndex({ locale, dictionary }: Props) {
       eyebrow={dictionary.sidebar.groupApps}
       title={dictionary.sidebar.appsTitle}
       lead={dictionary.sidebar.appsLead}
+      width="wide"
     >
-      <ul className="grid gap-4 sm:grid-cols-2">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {apps.map((app) => (
           <li key={app.id}>
             <a

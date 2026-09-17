@@ -76,11 +76,12 @@ test.describe("timeline", () => {
     await first.focus();
     await expect(first).toBeFocused();
 
+    // Primero el tipo, luego las competencias, y el rango al final:
+    // es otro eje de filtrado y va en su propio grupo.
     const labels = [
       "Trabajo",
       "Formación",
       "Certificaciones",
-      "Desde 2018",
       "Discovery",
       "Estrategia",
       "Delivery",
@@ -88,6 +89,7 @@ test.describe("timeline", () => {
       "IA aplicada",
       "Agilidad",
       "Stakeholders",
+      "Desde 2018",
     ];
 
     // Tabulando desde el primer filtro se recorren todos, en orden y sin saltos.

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
+import { CalendarRangeIcon, ChevronDownIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 import {
   COMPETENCY_TAGS,
@@ -84,12 +84,6 @@ export function TimelineBrowser({
               {dictionary[key]}
             </FilterButton>
           ))}
-          <FilterButton
-            pressed={recentOnly}
-            onClick={() => setRecentOnly((current) => !current)}
-          >
-            {dictionary.recentOnly}
-          </FilterButton>
         </fieldset>
 
         <fieldset className="flex flex-wrap items-center gap-2">
@@ -104,6 +98,27 @@ export function TimelineBrowser({
             </FilterButton>
           ))}
         </fieldset>
+
+        {/*
+          Fuera de los dos grupos de filtros y con otro aspecto: es un filtro
+          de rango, no de tipo, y compartir el relleno indigo lo hacia pasar
+          por uno de tipo activo.
+        */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            aria-pressed={recentOnly}
+            onClick={() => setRecentOnly((current) => !current)}
+            className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 font-mono text-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
+              recentOnly
+                ? "border-foreground/25 bg-secondary text-foreground"
+                : "border-dashed border-border text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <CalendarRangeIcon className="size-3.5" aria-hidden="true" />
+            {dictionary.recentOnly}
+          </button>
+        </div>
       </div>
 
       <p

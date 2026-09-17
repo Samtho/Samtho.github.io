@@ -36,7 +36,7 @@ export function Overview({ locale, dictionary }: Props) {
       id="overview"
       data-panel="overview"
       aria-labelledby="overview-title"
-      className="scroll-mt-4 px-5 py-8 sm:px-8 sm:py-12"
+      className="mx-auto w-full max-w-[48.75rem] scroll-mt-4 px-5 py-8 sm:px-8 sm:py-12"
     >
       <p className="font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">
         {profile.location[locale]}

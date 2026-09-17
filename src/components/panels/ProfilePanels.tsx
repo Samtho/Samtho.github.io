@@ -59,6 +59,7 @@ export function MethodPanel({ locale, dictionary }: Props) {
       id="method"
       eyebrow={dictionary.sidebar.groupProfile}
       title={dictionary.sections.method}
+      width="wide"
     >
       <ol className="grid gap-4 sm:grid-cols-3">
         {method.map((step, index) => (
@@ -98,8 +99,9 @@ export function CapabilitiesPanel({ locale, dictionary }: Props) {
       id="capabilities"
       eyebrow={dictionary.sidebar.groupProfile}
       title={dictionary.sections.capabilities}
+      width="wide"
     >
-      <ul className="grid gap-4 sm:grid-cols-2">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {capabilities.map((capability) => {
           const Icon = ICONS[capability.icon];
           return (

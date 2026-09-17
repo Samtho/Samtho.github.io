@@ -67,7 +67,7 @@ export function AppShell({ locale }: Props) {
           </div>
         </header>
 
-        <main id="main" className="mx-auto w-full max-w-4xl flex-1 pb-24 md:pb-0">
+        <main id="main" className="w-full flex-1 pb-24 md:pb-0">
           <Overview locale={locale} dictionary={dictionary} />
           <TimelinePanel locale={locale} dictionary={dictionary} />
           <MethodPanel locale={locale} dictionary={dictionary} />

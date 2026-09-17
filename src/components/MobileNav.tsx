@@ -161,10 +161,10 @@ export function MobileNav({
                 {dictionary.cta.cv}
               </a>
             ) : (
-              <span className="mt-3 flex flex-col items-center gap-1.5 rounded-lg border border-dashed border-border px-3 py-2.5 text-center text-sm text-muted-foreground">
+              <p className="mt-3 flex items-center justify-center gap-2 font-mono text-[0.6875rem] text-muted-foreground">
                 {dictionary.cta.cv}
                 <Pending />
-              </span>
+              </p>
             )}
           </div>
         </div>

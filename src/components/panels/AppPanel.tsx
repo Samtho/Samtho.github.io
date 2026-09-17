@@ -47,9 +47,9 @@ export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
       id={project.id}
       data-panel={project.id}
       aria-labelledby={`${project.id}-title`}
-      className="scroll-mt-4 px-5 py-8 sm:px-8 sm:py-12"
+      className="mx-auto w-full max-w-[68rem] scroll-mt-4 px-5 py-8 sm:px-8 sm:py-12"
     >
-      <header className="max-w-[60ch]">
+      <header className="max-w-[46ch]">
         <p className="font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">
           {dictionary.panel[EYEBROW[project.group]]}
         </p>
