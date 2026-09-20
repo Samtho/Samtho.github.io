@@ -193,6 +193,17 @@ export function findConfidentialTerms(text: string): string[] {
   });
 }
 
+/**
+ * Una familia dentro de un sistema. Solo la usa el panel de las skills: es
+ * lo que convierte "una docena de skills" en algo que se puede leer de un
+ * vistazo sin enumerarlas una a una.
+ */
+export const systemFamilySchema = z.object({
+  label: bilingualSchema,
+  description: bilingualSchema,
+});
+export type SystemFamily = z.infer<typeof systemFamilySchema>;
+
 /** Un embed dentro de un panel. Panoplia tiene dos, en pestanas internas. */
 export const embedSchema = z.object({
   label: bilingualSchema,
@@ -206,6 +217,12 @@ export const projectSchema = z
     /** Grupo de la barra lateral en el que aparece el panel. */
     group: z.enum(["apps", "ai"]),
     name: z.string().min(1),
+    /**
+     * Titular del panel, cuando no basta con el nombre. El nombre sigue
+     * mandando en la barra lateral y en la tarjeta del catalogo, que son
+     * sitios donde una frase larga no cabe.
+     */
+    headline: bilingualSchema.optional(),
     /** Subtitulo de la ficha: una frase de que hace. */
     tagline: bilingualSchema,
     description: bilingualSchema.optional(),
@@ -225,6 +242,8 @@ export const projectSchema = z
      * publicadas y la tarjeta la encabeza la defensa.
      */
     thumb: z.string().optional(),
+    /** Familias del sistema, para los paneles que agrupan muchas piezas. */
+    families: z.array(systemFamilySchema).default([]),
     /** id de otro panel con el que este se lee mejor. */
     related: z.string().optional(),
     /** Obligatorio y sin valor por defecto: obliga a decidir en cada proyecto. */
@@ -253,6 +272,18 @@ export const projectSchema = z
       ["problem.en", project.problem.en],
       ["decision.es", project.decision.es],
       ["decision.en", project.decision.en],
+      ...(project.headline
+        ? ([
+            ["headline.es", project.headline.es],
+            ["headline.en", project.headline.en],
+          ] as Array<[string, string]>)
+        : []),
+      ...project.families.flatMap((family, index): Array<[string, string]> => [
+        [`families[${index}].label.es`, family.label.es],
+        [`families[${index}].label.en`, family.label.en],
+        [`families[${index}].description.es`, family.description.es],
+        [`families[${index}].description.en`, family.description.en],
+      ]),
       ...(project.description
         ? ([
             ["description.es", project.description.es],

@@ -52,7 +52,7 @@ export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
           id={`${project.id}-title`}
           className="mt-2 font-display text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
         >
-          {project.name}
+          {project.headline ? project.headline[locale] : project.name}
         </h1>
         <p className="mt-3 text-lg text-pretty text-muted-foreground">
           <PendingText value={project.tagline[locale]} />
@@ -91,6 +91,24 @@ export function AppPanel({ project, locale, dictionary, relatedName }: Props) {
           </dd>
         </div>
       </dl>
+
+      {project.families.length > 0 ? (
+        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {project.families.map((family) => (
+            <li
+              key={family.label.es}
+              className="rounded-xl border border-border bg-card p-4"
+            >
+              <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-brand uppercase">
+                {family.label[locale]}
+              </p>
+              <p className="mt-2 text-sm text-pretty text-muted-foreground">
+                {family.description[locale]}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
       {project.description ? (
         <p className="mt-6 max-w-[68ch] text-sm text-pretty text-muted-foreground">

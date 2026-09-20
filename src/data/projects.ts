@@ -233,19 +233,67 @@ export const projects: Project[] = z.array(projectSchema).parse([
     id: "mis-skills",
     group: "ai",
     name: "Mis skills",
+    headline: {
+      es: "Mi trabajo, convertido en sistema",
+      en: "My work, turned into a system",
+    },
     tagline: {
-      es: "Mi trabajo, convertido en sistema.",
-      en: "My work, turned into a system.",
+      es: "Una docena de skills propias que ejecutan las tareas que más repito, con mi criterio dentro.",
+      en: "A dozen skills of my own that run the tasks I repeat most, with my judgement built in.",
     },
     year: "2026",
     problem: {
-      es: "Las tareas que más repito como PM tienen estructura fija: convertir una petición suelta en un ticket listo para desarrollo, resumir una reunión en decisiones y tareas con responsable, escribir un PRD. Las hacía a mano cada vez.",
-      en: "The tasks I repeat most as a PM have a fixed structure: turning a loose request into a ticket ready for development, condensing a meeting into decisions and owned tasks, writing a PRD. I was doing each one by hand every time.",
+      es: "Las tareas que más repito como PM tienen estructura fija. Convertir una petición suelta en un ticket listo para desarrollo, resumir una reunión en decisiones y tareas con responsable, escribir un PRD, redactar algo que suene a mí. Las hacía a mano cada vez, y la calidad dependía de cuánto tiempo tuviera ese día.",
+      en: "The tasks I repeat most as a PM have a fixed structure. Turning a loose request into a ticket ready for development, condensing a meeting into decisions and owned tasks, writing a PRD, drafting something that sounds like me. I did each one by hand every time, and the quality depended on how much time I had that day.",
     },
     role: { es: "Diseño y construcción.", en: "Design and build." },
     decision: {
-      es: "Cada skill codifica un criterio, no un formato. La de tickets no rellena una plantilla: aplica un umbral de calidad y no deja pasar un ticket sin criterios de aceptación.",
-      en: "Each skill encodes a standard, not a format. The ticket one does not fill in a template: it applies a quality bar and will not let a ticket through without acceptance criteria.",
+      es: "Cada skill codifica un criterio, no una plantilla. La de tickets no rellena campos: aplica un umbral de calidad y se niega a devolver un ticket sin criterios de aceptación. La de reuniones no resume: extrae decisiones, tareas con responsable y fecha, y bloqueos, y vuelve a revisarse a sí misma hasta pasar un checklist.",
+      en: "Each skill encodes a standard, not a template. The ticket one does not fill in fields: it applies a quality bar and refuses to return a ticket without acceptance criteria. The meeting one does not summarise: it extracts decisions, tasks with an owner and a date, and blockers, then reviews itself again until it passes a checklist.",
+    },
+    // Las familias se quedan en generico a proposito. Hay skills construidas
+    // sobre procesos internos de un empleador, y ni su nombre ni su flujo
+    // concreto pueden aparecer aqui.
+    families: [
+      {
+        label: { es: "Producto", en: "Product" },
+        description: {
+          es: "PRDs, briefs y tickets listos para desarrollo",
+          en: "PRDs, briefs and tickets ready for development",
+        },
+      },
+      {
+        label: { es: "Reuniones", en: "Meetings" },
+        description: {
+          es: "De transcripción a informe de una página con decisiones, tareas y bloqueos",
+          en: "From transcript to a one-page report with decisions, tasks and blockers",
+        },
+      },
+      {
+        label: { es: "Escritura", en: "Writing" },
+        description: {
+          es: "Voz editorial propia y varias técnicas narrativas",
+          en: "A personal editorial voice and several narrative techniques",
+        },
+      },
+      {
+        label: { es: "Carrera", en: "Career" },
+        description: {
+          es: "Posicionamiento, marca personal, preparación de entrevistas",
+          en: "Positioning, personal brand, interview preparation",
+        },
+      },
+      {
+        label: { es: "Construcción", en: "Build" },
+        description: {
+          es: "Stack estándar del portafolio y creación de skills nuevas",
+          en: "The portfolio's standard stack and building new skills",
+        },
+      },
+    ],
+    description: {
+      es: "El sistema se construye a sí mismo: una de las skills sirve para crear las demás.",
+      en: "The system builds itself: one of the skills exists to create the others.",
     },
     stack: ["Claude Skills", "MCP"],
     tags: ["ai", "delivery"],
