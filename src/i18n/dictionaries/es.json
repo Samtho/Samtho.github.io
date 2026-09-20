@@ -18,13 +18,13 @@
     "projects": "Proyectos",
     "metrics": "En números",
     "faq": "Preguntas frecuentes",
-    "cta": "Hablemos"
+    "cta": "Hablemos",
+    "catalogue": "El catálogo"
   },
   "hero": {
     "viewProjects": "Ver proyectos",
     "downloadCv": "Descargar CV",
-    "photoAlt": "Retrato de Samuel Ortega",
-    "photoPending": "Foto"
+    "photoAlt": "Retrato de Samuel Ortega"
   },
   "proof": {
     "note": "Empresas, escuelas y entidades por las que he pasado."

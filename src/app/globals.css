@@ -9,6 +9,10 @@
   --color-brand-foreground: var(--brand-foreground);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-masthead: var(--masthead);
+  --color-masthead-foreground: var(--masthead-foreground);
+  --color-masthead-muted: var(--masthead-muted);
+  --color-masthead-border: var(--masthead-border);
   /* Apuntaba a si misma, asi que el cuerpo caia al serif del navegador. */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -63,6 +67,17 @@
   --popover: oklch(0.994 0.005 84);
   --popover-foreground: oklch(0.215 0.008 70);
 
+  /**
+   * Portada. Tinta sobre la que el papel de la pagina se lee como corte.
+   * El valor esta fijado por contraste, no a ojo: con L mas alta el boton
+   * indigo baja de 3:1 contra el fondo, que es lo que pide WCAG 1.4.11 para
+   * la frontera de un control.
+   */
+  --masthead: oklch(0.155 0.006 70);
+  --masthead-foreground: oklch(0.977 0.009 84);
+  --masthead-muted: oklch(0.735 0.01 80);
+  --masthead-border: oklch(0.315 0.008 70);
+
   /* Indigo, unico acento del sistema. */
   --primary: oklch(0.511 0.262 276.966);
   --primary-foreground: oklch(0.985 0 0);
@@ -106,6 +121,12 @@
   --card-foreground: oklch(0.967 0 0);
   --popover: oklch(0.158 0 0);
   --popover-foreground: oklch(0.967 0 0);
+
+  /* Sobre negro real la portada no puede hundirse mas: se levanta. */
+  --masthead: oklch(0.162 0 0);
+  --masthead-foreground: oklch(0.967 0 0);
+  --masthead-muted: oklch(0.725 0 0);
+  --masthead-border: oklch(0.285 0 0);
 
   --primary: oklch(0.673 0.182 276.935);
   --primary-foreground: oklch(0.145 0 0);
