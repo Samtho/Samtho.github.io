@@ -48,8 +48,8 @@ export const faq: FaqItem[] = z.array(faqItemSchema).parse([
       en: "Which languages do you work in?",
     },
     answer: {
-      es: "Español nativo, inglés C1, portugués B1 y alemán básico.",
-      en: "Native Spanish, C1 English, B1 Portuguese and basic German.",
+      es: "Español nativo, inglés C1 y portugués B1.",
+      en: "Native Spanish, C1 English and B1 Portuguese.",
     },
   },
 ]);
