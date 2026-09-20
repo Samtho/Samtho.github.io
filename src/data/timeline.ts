@@ -191,8 +191,8 @@ export const timeline: TimelineEntry[] = z.array(timelineEntrySchema).parse([
     },
     highlights: [
       {
-        es: "Trabajo de fin de máster: Panoplia, análisis del mix de géneros del catálogo para una estrategia de exportación.",
-        en: "Final master's project: Panoplia, an analysis of catalogue genre mix for an export strategy.",
+        es: "Trabajo de fin de máster: Panoplia, análisis del catálogo de una distribuidora de libros para una estrategia de exportación.",
+        en: "Final master's project: Panoplia, a catalogue analysis for a book distributor, aimed at an export strategy.",
       },
     ],
     tags: ["data", "ai"],

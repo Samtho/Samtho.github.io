@@ -154,17 +154,17 @@ export const projects: Project[] = z.array(projectSchema).parse([
     group: "apps",
     name: "Panoplia",
     tagline: {
-      es: "Análisis del mix de géneros de un catálogo de libros para decidir una estrategia de exportación.",
-      en: "Genre mix analysis of a book catalogue to decide an export strategy.",
+      es: "Análisis del catálogo de una distribuidora de libros para decidir su estrategia de exportación.",
+      en: "Catalogue analysis for a book distributor, to decide its export strategy.",
     },
     description: {
-      es: "Trabajo de fin de máster en INESDI, publicable con permiso. Estudia si conviene cambiar el mix de géneros del catálogo de cara a la exportación.",
-      en: "Final master's project at INESDI, published with permission. It studies whether changing the catalogue's genre mix pays off for export.",
+      es: "Trabajo de fin de máster en INESDI, publicable con permiso. Estudia si a una distribuidora de libros le conviene cambiar el mix de géneros que mueve de cara a la exportación.",
+      en: "Final master's project at INESDI, published with permission. It studies whether a book distributor should change the genre mix it moves in order to export.",
     },
     year: "2026",
     problem: {
-      es: "Decidir si cambiar el mix de géneros de un catálogo para exportar se hace por intuición editorial, sin mirar qué se vende fuera.",
-      en: "Deciding whether to change a catalogue's genre mix for export gets done on editorial instinct, without looking at what actually sells abroad.",
+      es: "Una distribuidora decide qué géneros empuja fuera por intuición, sin mirar qué se vende de verdad en cada mercado.",
+      en: "A distributor decides which genres to push abroad on instinct, without looking at what actually sells in each market.",
     },
     role: {
       es: `Producto y desarrollo, dentro de un equipo de cinco del máster. ${PENDING}`,
