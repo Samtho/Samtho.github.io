@@ -71,7 +71,15 @@ test.describe("timeline", () => {
     expect(visible).toBe(total);
   });
 
-  test("todos los filtros se alcanzan con el tabulador", async ({ page }) => {
+  test("todos los filtros se alcanzan con el tabulador", async ({
+    page,
+    browserName,
+  }) => {
+    // En Safari el tabulador no se posa en los botones salvo que el sistema
+    // tenga activado el acceso completo por teclado. Es comportamiento del
+    // navegador, no del sitio, y no hay nada que comprobar aqui.
+    test.skip(browserName === "webkit", "Safari no tabula botones por defecto");
+
     const first = page.getByRole("button", { name: "Todo", exact: true });
     await first.focus();
     await expect(first).toBeFocused();
@@ -136,12 +144,21 @@ test.describe("shell", () => {
     request,
   }) => {
     await page.goto("/");
+
+    // En movil la barra lateral se pliega dentro de la hoja "Mas".
+    const more = page.getByRole("button", { name: "Más", exact: true });
+    if (await more.isVisible()) await more.click();
+
     const cv = page.locator('a[href$=".pdf"]').first();
 
     if ((await cv.count()) === 0) {
       // Todavia no hay PDF: la pagina no puede ofrecer un enlace roto,
       // asi que muestra el hueco marcado en su lugar.
-      await expect(page.getByText("[por definir]").first()).toBeVisible();
+      // La barra lateral de escritorio sigue en el DOM en movil, oculta por
+      // CSS, asi que hay que quedarse con el marcador que se ve de verdad.
+      await expect(
+        page.getByText("[por definir]").filter({ visible: true }).first(),
+      ).toBeVisible();
       return;
     }
 
@@ -190,9 +207,20 @@ test.describe("paneles", () => {
   });
 
   // La regla que sostiene los 97 de Lighthouse.
-  test("el iframe no existe hasta pulsar el boton", async ({ page }) => {
+  test("el iframe no existe hasta pulsar el boton", async ({
+    page,
+    isMobile,
+  }) => {
     await page.goto("/#jano");
     await expect(page.locator("iframe")).toHaveCount(0);
+
+    if (isMobile) {
+      // En movil no hay iframe en ningun momento: la app se abre fuera.
+      await expect(
+        page.getByRole("link", { name: "Abrir a pantalla completa" }),
+      ).toBeVisible();
+      return;
+    }
 
     await page.getByRole("button", { name: "Cargar aplicación" }).click();
     await expect(page.locator("iframe")).toHaveCount(1);

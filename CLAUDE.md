@@ -165,6 +165,27 @@ publicada y comprobar que no arrastra datos reales de ningún empleador: nombres
 de personas, clientes, costes o métricas de negocio. Si los arrastra, no se
 embebe.
 
+### Las miniaturas son generadas, nunca a mano
+
+Cada app publicada tiene una captura en `public/thumbs/`, y de cada una se
+escriben tres anchos: `<slug>.webp` a 1280x800 es la canónica, y `-800` y
+`-480` existen para que una tarjeta de 370 puntos no se descargue la grande.
+Las genera `npm run thumbs`, que se puede reejecutar entera o por filtro
+(`npm run thumbs -- jano`). Nunca se retocan a mano: si una se ve mal, se
+arregla la app o el `prepare` de su entrada en el script.
+
+El script aborta la captura, en vez de guardar algo malo, en dos casos:
+
+1. **Confidencialidad.** Lee el texto que de verdad cae dentro del recorte y lo
+   pasa por `findConfidentialTerms`, la misma lista negra que valida los datos.
+   Una app puede cambiar de maquetación y subir al recorte una línea que nombra
+   a un empleador o a un cliente. Eso no puede entrar en silencio.
+2. **Contenido.** Las apps que arrancan vacías llevan su propio `verify`. Sin
+   miniatura antes que con una miniatura vacía sin enterarse.
+
+`tests/thumbs.test.ts` comprueba que la lista de URLs del script cuadra con
+`projects.ts` y que existen los tres anchos de cada tarjeta.
+
 ### Árbol
 
 ```
@@ -179,10 +200,12 @@ src/
 ├── components/
 │   ├── AppShell.tsx            barra lateral + paneles + navegación móvil
 │   ├── Sidebar.tsx, MobileNav.tsx, NavHighlight.tsx
+│   ├── Portrait.tsx            retrato de la portada, o el monograma
 │   ├── panels/
 │   │   ├── Panel.tsx           carcasa común de panel
 │   │   ├── AppPanel.tsx        la anatomía de ficha de arriba
 │   │   ├── LazyEmbed.tsx       marco con botón "Cargar aplicación"
+│   │   ├── AppsGrid.tsx        el catálogo, compartido por Overview y #apps
 │   │   ├── Overview.tsx, AppsIndex.tsx, ProfilePanels.tsx
 │   └── ui/                     shadcn
 ├── data/                       (sin cambios respecto a la v1)
@@ -190,6 +213,12 @@ src/
 └── lib/
     ├── nav.ts                  estructura y contadores de la barra
     ├── metadata.ts, date.ts, assets.ts
+
+scripts/
+├── og.mjs                      copia la imagen OG con extensión .png
+└── thumbs.mjs                  captura las miniaturas de las apps
+
+public/thumbs/                  las capturas, en tres anchos cada una
 ```
 
 ## Convenciones de código
@@ -218,6 +247,17 @@ Lenguaje visual aprobado en Claude Design. No improvisar sobre esto.
   encima de cada titular de panel.
 - **Tarjetas** con borde de 1px y radio suave. Sin sombras pesadas.
 - **Avatar cuadrado** con las iniciales SO sobre índigo, arriba de la barra.
+- **Portada del Overview**: bloque de tinta a sangre completa con el retrato,
+  el nombre, el titular y los enlaces. Tokens propios (`--masthead*`), porque
+  en tema oscuro no puede hundirse más que el negro de la página: se levanta.
+  El corte con el papel es seco. Cualquier degradado deja costura y ensucia.
+  El valor de `--masthead` en claro está fijado por contraste, no a ojo: con L
+  más alta el botón índigo baja de los 3:1 que pide WCAG para un control.
+- **Catálogo antes que texto.** La rejilla de apps va inmediatamente debajo de
+  la portada, con la miniatura ocupando la mayor parte de la tarjeta. Es el
+  argumento del sitio, y entra por el ojo antes que por la letra.
+- Mientras no haya foto, el retrato es el monograma sobre un halo índigo. Es un
+  marcador que se sostiene solo, no un aviso de que falta algo.
 - Modo claro y oscuro, con `prefers-color-scheme` y override manual.
 - Móvil primero. Se revisa a 375px antes de dar nada por terminado.
 
@@ -238,7 +278,8 @@ Antes de publicar la URL en el CV hay que quitar el `.skip` del test
 npm run dev            # desarrollo
 npm run build          # export estático a ./out
 npm run test           # Vitest
-npm run test:e2e       # Playwright
+npm run test:e2e       # Playwright (chromium y webkit)
+npm run thumbs         # regenera las miniaturas de las apps
 npm run lint
 npx tsc --noEmit       # chequeo de tipos
 ```
