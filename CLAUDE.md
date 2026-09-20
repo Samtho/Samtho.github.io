@@ -120,7 +120,6 @@ una navegación de cliente, y el panel se perdería.
 |---|---|
 | PERFIL | Overview, Trayectoria, Método, Competencias, FAQ |
 | APPS | Jano, Umbral, Aura Closet, PI Planning Lite, Panoplia, The Movies Database |
-| ANÁLISIS | SaludPlus, Grupo B, LogiFast, Rentabilidad ML |
 | SISTEMA IA | Mis skills, Integraciones MCP |
 
 Los contadores de la barra **se derivan de los datos** (`src/lib/nav.ts`),
@@ -128,18 +127,21 @@ nunca se escriben a mano.
 
 En móvil no hay barra lateral: cabecera arriba y barra inferior de cuatro
 pestañas (Overview, Apps, Trayectoria, Más). "Más" abre una hoja con el resto,
-más ES/EN, tema y CV.
+más ES/EN y tema.
 
 ### Anatomía de un panel de app
 
-Fija para todos los paneles con ficha, incluidos los de Análisis y Sistema IA:
+Fija para todos los paneles con ficha, los de Apps y los de Sistema IA:
 
 ```
 [etiqueta mono]  APP
-[titular]        Nombre
+[titular]        Nombre, o `headline` cuando el nombre no basta
 [subtítulo]      Una frase de qué hace
 
 El problema  ·  Mi papel  ·  La decisión  ·  Stack   (rejilla de cuatro)
+
+[familias]       solo si las tiene, para un sistema con muchas piezas
+[descripción]    un párrafo, opcional
 
 [botones]        Abrir en pestaña nueva  ·  Repositorio
 ─────────────────────────────────────────────────────
@@ -147,6 +149,16 @@ El problema  ·  Mi papel  ·  La decisión  ·  Stack   (rejilla de cuatro)
 ```
 
 La ficha es el argumento; el embed es la prueba.
+
+### Las llamadas a la acción viven solo en la portada
+
+Contacto, LinkedIn, GitHub y el CV van juntos al lado del nombre, en el bloque
+de portada del Overview, y en ningún otro sitio. Ningún panel repite un botón
+de contacto ni de descarga.
+
+Lo que sí lleva cada panel de app son sus botones de herramienta: "Abrir en
+pestaña nueva", "Repositorio" y "Cargar aplicación". Esos no son llamadas a la
+acción, son la forma de usar lo que el panel enseña.
 
 ### Los embeds son perezosos, siempre
 
