@@ -16,17 +16,12 @@ type Props = {
 
 const EYEBROW = {
   apps: "kindApp",
-  analysis: "kindAnalysis",
   ai: "kindAi",
 } as const;
 
-/**
- * Cada grupo nombra sus bloques como le corresponde. Un analisis no tiene
- * "problema" y "decision": tiene un encargo y un hallazgo.
- */
+/** Cada grupo nombra sus bloques como le corresponde. */
 const LABELS = {
   apps: { first: "problem", third: "decision", fourth: "stack" },
-  analysis: { first: "brief", third: "finding", fourth: "tools" },
   ai: { first: "problem", third: "decision", fourth: "tools" },
 } as const;
 

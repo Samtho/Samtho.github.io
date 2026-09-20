@@ -79,7 +79,6 @@
     "availability": "Disponible para conversar",
     "groupProfile": "Perfil",
     "groupApps": "Apps",
-    "groupAnalysis": "Análisis",
     "groupAi": "Sistema IA",
     "overview": "Overview",
     "nav": "Navegación principal",
@@ -92,7 +91,6 @@
   },
   "panel": {
     "kindApp": "App",
-    "kindAnalysis": "Análisis",
     "kindAi": "Sistema IA",
     "problem": "El problema",
     "myRole": "Mi papel",
@@ -101,8 +99,6 @@
     "openNewTab": "Abrir en pestaña nueva",
     "repo": "Repositorio",
     "related": "Se lee mejor junto a",
-    "brief": "El encargo",
-    "finding": "El hallazgo",
     "tools": "Herramientas"
   },
   "embed": {

@@ -204,7 +204,7 @@ export const projectSchema = z
   .object({
     id: z.string().min(1),
     /** Grupo de la barra lateral en el que aparece el panel. */
-    group: z.enum(["apps", "analysis", "ai"]),
+    group: z.enum(["apps", "ai"]),
     name: z.string().min(1),
     /** Subtitulo de la ficha: una frase de que hace. */
     tagline: bilingualSchema,

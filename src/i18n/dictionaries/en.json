@@ -79,7 +79,6 @@
     "availability": "Open to a conversation",
     "groupProfile": "Profile",
     "groupApps": "Apps",
-    "groupAnalysis": "Analysis",
     "groupAi": "AI system",
     "overview": "Overview",
     "nav": "Main navigation",
@@ -92,7 +91,6 @@
   },
   "panel": {
     "kindApp": "App",
-    "kindAnalysis": "Analysis",
     "kindAi": "AI system",
     "problem": "The problem",
     "myRole": "My part",
@@ -101,8 +99,6 @@
     "openNewTab": "Open in a new tab",
     "repo": "Repository",
     "related": "Reads best alongside",
-    "brief": "The brief",
-    "finding": "What we found",
     "tools": "Tools"
   },
   "embed": {

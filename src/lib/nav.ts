@@ -22,7 +22,7 @@ export type NavGroup = {
  * se escriben a mano: asi no pueden quedarse desfasados.
  */
 export function navGroups(dictionary: Dictionary): NavGroup[] {
-  const panels = (group: "apps" | "analysis" | "ai"): NavItem[] =>
+  const panels = (group: "apps" | "ai"): NavItem[] =>
     projectsByGroup(group).map((project) => ({
       id: project.id,
       label: project.name,
@@ -52,7 +52,6 @@ export function navGroups(dictionary: Dictionary): NavGroup[] {
       ],
     },
     { label: dictionary.sidebar.groupApps, items: panels("apps") },
-    { label: dictionary.sidebar.groupAnalysis, items: panels("analysis") },
     { label: dictionary.sidebar.groupAi, items: panels("ai") },
   ];
 }
