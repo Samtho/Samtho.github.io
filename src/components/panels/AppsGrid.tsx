@@ -39,6 +39,7 @@ export function AppsGrid({ apps, locale, dictionary }: Props) {
             href={`#${app.id}`}
             className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element -- export estatico: next/image no optimiza nada aqui y el srcset es nuestro */}
             <img
               src={`/thumbs/${thumbOf(app)}.webp`}
               srcSet={srcSet(thumbOf(app))}

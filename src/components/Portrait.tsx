@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- export estatico: next/image no optimiza nada y este archivo no hace otra cosa que pintar una imagen */
 import { profile } from "@/data/profile";
 
 /**

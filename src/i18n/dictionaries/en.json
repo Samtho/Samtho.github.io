@@ -18,12 +18,10 @@
     "projects": "Projects",
     "metrics": "By the numbers",
     "faq": "Frequently asked questions",
-    "cta": "Let's talk",
     "catalogue": "The catalogue"
   },
   "hero": {
     "viewProjects": "See projects",
-    "downloadCv": "Download CV",
     "photoAlt": "Portrait of Samuel Ortega"
   },
   "proof": {
@@ -56,7 +54,6 @@
     "roles": "Roles"
   },
   "cta": {
-    "intro": "If you need someone to bring order to product, get in touch.",
     "email": "Email me",
     "linkedin": "LinkedIn",
     "github": "GitHub",
