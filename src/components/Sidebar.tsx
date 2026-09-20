@@ -1,4 +1,3 @@
-import { DownloadIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/getDictionary";
@@ -61,18 +60,11 @@ export function Sidebar({ locale, dictionary }: Props) {
           />
         </div>
 
-        {hasCv ? (
-          <a
-            href={profile.cvPath}
-            download
-            className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          >
-            <DownloadIcon className="size-4" aria-hidden="true" />
-            {dictionary.cta.cv}
-          </a>
-        ) : (
-          // Sin PDF no se pinta el boton: un enlace muerto se lee como un
-          // error de la pagina. El bloque entero vuelve cuando exista.
+        {/**
+         * Solo el marcador. El boton de descarga es una llamada a la accion y
+         * esas viven todas juntas en la portada, al lado del nombre.
+         */}
+        {hasCv ? null : (
           <p className="mt-3 flex items-center justify-center gap-2 font-mono text-[0.6875rem] text-muted-foreground">
             {dictionary.cta.cv}
             <Pending />

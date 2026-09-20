@@ -92,7 +92,6 @@ export function AppShell({ locale }: Props) {
         dictionary={dictionary}
         locale={locale}
         hasCv={hasCv}
-        cvPath={profile.cvPath}
       />
       <NavHighlight fallback="overview" />
     </div>

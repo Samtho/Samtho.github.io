@@ -1,9 +1,10 @@
-import { ArrowUpRightIcon, MailIcon } from "lucide-react";
+import { ArrowUpRightIcon, DownloadIcon, MailIcon } from "lucide-react";
 import { metrics } from "@/data/metrics";
 import { profile } from "@/data/profile";
 import { projectsByGroup } from "@/data/projects";
 import { PENDING } from "@/data/schema";
 import { timeline } from "@/data/timeline";
+import { hasCv } from "@/lib/assets";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/getDictionary";
 import { Counter } from "../Counter";
@@ -109,6 +110,14 @@ export function Overview({ locale, dictionary }: Props) {
                 {dictionary.cta.github}
                 <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
               </a>
+
+              {/* Los CTA viven solo aqui, asi que el CV tambien. */}
+              {hasCv ? (
+                <a href={profile.cvPath} download className={MASTHEAD_LINK}>
+                  <DownloadIcon className="size-4" aria-hidden="true" />
+                  {dictionary.cta.cv}
+                </a>
+              ) : null}
             </div>
           </div>
         </div>
@@ -203,24 +212,6 @@ export function Overview({ locale, dictionary }: Props) {
               </div>
             ))}
           </dl>
-        </div>
-
-        <div className="mt-12 border-t border-border pt-8">
-          <p className={`${LABEL} text-muted-foreground`}>
-            {dictionary.sections.cta}
-          </p>
-          <p className="mt-4 max-w-[40ch] font-display text-xl text-balance">
-            {dictionary.cta.intro}
-          </p>
-          {profile.email === PENDING ? null : (
-            <a
-              href={`mailto:${profile.email}`}
-              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              <MailIcon className="size-4" aria-hidden="true" />
-              {dictionary.cta.email}
-            </a>
-          )}
         </div>
       </div>
     </section>

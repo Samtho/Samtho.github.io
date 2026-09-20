@@ -2,7 +2,6 @@
 
 import {
   ClockIcon,
-  DownloadIcon,
   LayoutGridIcon,
   MenuIcon,
   UserIcon,
@@ -22,7 +21,6 @@ type Props = {
   locale: Locale;
   /** Se resuelve en build time, asi que llega por props. */
   hasCv: boolean;
-  cvPath: string;
 };
 
 /**
@@ -34,7 +32,6 @@ export function MobileNav({
   dictionary,
   locale,
   hasCv,
-  cvPath,
 }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -151,16 +148,8 @@ export function MobileNav({
               />
             </div>
 
-            {hasCv ? (
-              <a
-                href={cvPath}
-                download
-                className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground"
-              >
-                <DownloadIcon className="size-4" aria-hidden="true" />
-                {dictionary.cta.cv}
-              </a>
-            ) : (
+            {/* Igual que en la barra: aqui solo el marcador. */}
+            {hasCv ? null : (
               <p className="mt-3 flex items-center justify-center gap-2 font-mono text-[0.6875rem] text-muted-foreground">
                 {dictionary.cta.cv}
                 <Pending />
