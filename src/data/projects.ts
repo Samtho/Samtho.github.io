@@ -178,6 +178,7 @@ export const projects: Project[] = z.array(projectSchema).parse([
     tags: ["data", "strategy"],
     liveUrl: "https://samtho.github.io/panoplia-defensa-v4/",
     repoUrl: "https://github.com/Samtho/panoplia-defensa-v4",
+    thumb: "panoplia-defensa",
     embeds: [
       {
         label: { es: "Defensa", en: "Defence" },

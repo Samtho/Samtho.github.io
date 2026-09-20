@@ -35,7 +35,8 @@
     "live": "View online",
     "repo": "Repository",
     "sourceAcademic": "Academic",
-    "sourcePersonal": "Personal"
+    "sourcePersonal": "Personal",
+    "thumbAlt": "Screenshot of {name}"
   },
   "timeline": {
     "filterByKind": "Filter by type",

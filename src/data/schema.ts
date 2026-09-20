@@ -219,6 +219,12 @@ export const projectSchema = z
     liveUrl: pending(z.url()).optional(),
     repoUrl: pending(z.url()).optional(),
     embeds: z.array(embedSchema).default([]),
+    /**
+     * Que captura encabeza la tarjeta del catalogo, cuando no es la que
+     * lleva el id del proyecto. Solo Panoplia la necesita: tiene dos apps
+     * publicadas y la tarjeta la encabeza la defensa.
+     */
+    thumb: z.string().optional(),
     /** id de otro panel con el que este se lee mejor. */
     related: z.string().optional(),
     /** Obligatorio y sin valor por defecto: obliga a decidir en cada proyecto. */
